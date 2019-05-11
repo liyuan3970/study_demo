@@ -19,3 +19,5 @@
    1. docker run -d **容器名称(filetest)** 
    2. docker run -it **容器名称(filetest)**<br/>ctrl +p ctrl +q
    3. 查看此时运行的docke容器 --> docker ps
+#知识点总结
+![image][docker.png]
