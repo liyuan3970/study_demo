@@ -37,5 +37,7 @@
 7. 停止已经运行的容器
    1. docker kill 容器名
    2. docker stop 容器名
+8. 用dockerfile构建镜像
+   1. docker bulid Dockerfile -t='镜像名称' .-->(Dockerfile的路径) 
 ##知识点总结
 ![image](docker.png)
