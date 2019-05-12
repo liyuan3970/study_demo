@@ -39,5 +39,29 @@
    2. docker stop 容器名
 8. 用dockerfile构建镜像
    1. docker bulid Dockerfile -t='镜像名称' .-->(Dockerfile的路径) 
+9. Dockerfile的命令集
+   1. 注释 #注释信息
+   2. FROM<image>:<tag> #从哪个基础镜像来的
+      1. FROM ubuntu：18.04
+   3. MAINTAINER #此文件的各种信息
+      1. MAINTAINER liyuan3970 "857956255@qq.com"
+   4. RUN 镜像中运行的命令
+      1. RUN apt-get install ncl 
+   5. EXPOSE #暴露的端口号
+      1. EXPORT 80 #开了也没用，要手动开如下
+      2. docker run -p80 -d dormancypress/df_test1 nginx -g "daemon off;"
+   6. 制定容器运行时的命令
+      1. CMD 容器运行的默认行为
+      2. ENTERYPOINT 
+   7. 设置镜像的目录和文件
+      1. ADD 加载文件
+      2. COPY 加载文件 
+      3. VOLUME["/data"] 共享数据
+   8. 镜像构建和环境运行时的设置
+      1. WORKDIR 制定命令工作目录
+      2. ENV 设置环境变量
+      3. USER 制定镜像用户
+   9. ONBUILD #触发器的指令 子镜像构建的时候使用
+10. 
 ##知识点总结
 ![image](docker.png)
