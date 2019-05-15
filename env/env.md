@@ -12,7 +12,7 @@ virtualenv venv　　#venv为虚拟环境目录名，目录名自定义
 #为环境指定python版本
 
 ```shell
-virtualenv -p /usr/bin/python2.7 venv# -p参数指定Python解释器程序路径
+virtualenv -p /home/liyuan3970/anaconda/bin/python3.7 venv# -p参数指定Python解释器程序路径
 ```
 
 #激活环境
