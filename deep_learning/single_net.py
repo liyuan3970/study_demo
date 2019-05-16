@@ -93,6 +93,6 @@ p=Perceptron(f,x)
 #这里的1000的意思时迭代了1000次！！还是打个字吧
 p.train(ls,1000,0.1)
 p.__str__()
-x1=[1,1]
+x1=[0,1]
 y1=p.predict(x1)
 print(y1)
