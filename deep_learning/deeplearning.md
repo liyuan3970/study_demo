@@ -120,6 +120,12 @@ print(y1)
 ```
 以上使用底层numpy实现的一个单层神经网络的二分类
 
+
+
+
+
+
+
 # 用双层网络实现xor的逻辑
 ## BP算法
 + BP神经网络是1986年由Rumelhart和McClelland为首的科学家提出的概念
@@ -144,7 +150,7 @@ print(y1)
 ## **BP神经网络解决异或**
 ```python
 #-*- coding: utf-8 -*-
-
+#这个脚本参照https://blog.csdn.net/zzZ_CMing/article/details/79118894的博客，学习到了大神的精华，非常感谢！
 
 import numpy as np
 
@@ -165,9 +171,10 @@ W = np.random.random((4,1))*2-1
 #print('输入层连接隐藏层的权值V：',V)
 #print('隐藏层连接输出层的权值W：',W)
 
+#定义sigmoid函数
 def sigmoid(x):
     return 1/(1+np.exp(-x))
-
+#定义sigmoid的导数
 def dsigmoid(x):
     return x*(1-x)
 
@@ -210,5 +217,239 @@ if __name__ == "__main__":
 ```
 
 
+# 利用卷积神经网络（CNN）Lenet-5预测手写字体
+
+## 准备工作
+1. 安装tensorflow
+2. 下载数据
+   1. 训练数据 ---> /Lenet-5/dataset/mnist/train*
+   2. 测试数据 ---> /Lenet-5/dataset/mnist/t10*
+   3. 说明：
+      1. 训练数据是55000张手写的0~9的数字图像
+      2. 测试数据是10000张.....数据
+3. Lenet-5结构
+
+## Lenet-5神经网络的结构
+**卷积神经网络的主要组成：**
+1. 卷积层（Convolutional layer），卷积运算的目的是提取输入的不同特征，第一层卷积层可能只能提取一些低级的特征如边缘、线条和角等层级，更多层的网络能从低级特征中迭代提取更复杂的特征。
+2. 池化层（Pooling），它实际上一种形式的向下采样。有多种不同形式的非线性池化函数，而其中最大池化（Max pooling）和平均采样是最为常见的
+3. 全连接层（Full connection）, 与普通神经网络一样的连接方式，一般都在最后几层
+4. Pooling层相当于把一张分辨率较高的图片转化为分辨率较低的图片；pooling层可进一步缩小最后全连接层中节点的个数，从而达到减少整个神经网络中参数的目的。
+
+## Lenet-5结构
+![Lenet-5](src/Lenet-5.png)
+## **LeNet-5中主要有2个卷积层、2个下抽样层（池化层）、3个全连接层3种连接方式**
 
 
+
+# 代码写起来！
+# 1. 数据处理
+```python
+"""
+    导入库
+"""
+from tensorflow.examples.tutorials.mnist import input_data
+import matplotlib.pyplot as plt
+import numpy as np
+
+"""
+    数据加载
+    one-hot:热编码,
+"""
+def loadData(filename):
+    #用独热编码加载mnist数据，独热编码的意思是对标签进行01编码，真为1其他为0
+    mnist=input_data.read_data_sets(filename,one_hot=True)
+    #准确的悬链数据标签 cls是真实的确定的数据
+    mnist.train.cls=np.argmax(mnist.train.labels,axis=1)
+    #用来验证的数据集，模型训练好了用这个来验证模型性能
+    mnist.validation.cls = np.argmax(mnist.validation.labels, axis=1)
+    #用来测试模型正确性
+    mnist.test.cls = np.argmax(mnist.test.labels, axis=1)
+    return mnist
+
+
+#测试输出的数据
+mnist=loadData('../../dataset/mnist')
+print(mnist.train.images[0])
+```
+# 2. tensorflow上训练模型
+```python
+"""
+ 构建训练模型:LeNet5
+ 对数据进行训练
+ 并对训练的结果进行性能评估
+"""
+# 输入层,输出层
+input_x=tf.placeholder(dtype=tf.float32,shape=[None,784])
+input_img=tf.reshape(input_x,shape=[-1,28,28,1])
+output_y=tf.placeholder(dtype=tf.float32,shape=[None,10])
+output_cls=tf.argmax(output_y,dimension=1)
+
+# 卷积层1
+"""
+ 32个5*5大小的卷积核
+ 卷积运算:same
+ 激活函数:relu
+ 输出:32个28*28的矩阵
+"""
+conv1=tf.layers.conv2d(inputs=input_img,  # 输入数据
+                       filters=32,        # 卷积核的数量
+                       kernel_size=[5,5], # 卷积核的大小
+                       padding='same',    # 卷积运算的方式
+                       activation=tf.nn.relu) #激活函数
+# 池化层1
+"""
+  池化核:2*2最大值池化
+  输出:32个14*14
+"""
+pool1=tf.layers.max_pooling2d(inputs=conv1,
+                              pool_size=[2,2],
+                              strides=2)
+
+
+# 卷积层2
+"""
+ 64个5*5大小的卷积核
+ 卷积运算:same
+ 激活函数:relu
+ 输出:64个14*14的矩阵
+"""
+conv2=tf.layers.conv2d(inputs=pool1,  # 输入数据
+                       filters=64,        # 卷积核的数量
+                       kernel_size=[5,5], # 卷积核的大小
+                       padding='same',    # 卷积运算的方式
+                       activation=tf.nn.relu) #激活函数
+# 池化层2
+"""
+  池化核:2*2最大值池化
+  输出:64个7*7
+"""
+pool2=tf.layers.max_pooling2d(inputs=conv2,
+                              pool_size=[2,2],
+                              strides=2)
+
+#扁平化pool2 7*7*64结果,目的是为了进行全连接运算
+flat=tf.reshape(pool2,shape=[-1,7*7*64])
+
+#定义全连接的神经元
+#全连接层1
+full1=tf.layers.dense(inputs=flat,units=1024,
+    activation=tf.nn.relu
+    )
+#防止过拟合，1.数据增强 2.正则化 3.降采样rate=0.4 40%的不用链接
+dp=tf.layers.dropout(inputs=full1,rate=0.4)
+
+#结果层全连接层2
+'''
+最后输出的0～9数字的概率，输出多分类的结果
+多分类使用softmax激活函数
+对于二分类来说，则使用sigmoid激活函数
+'''
+full2=tf.layers.dense(inputs=dp,units=10,)
+#表示0到9的概率有多大
+#归一化
+logit=tf.nn.softmax(full2)
+#预测类别
+pred=tf.argmax(logit,dimension=1)
+
+#利用交叉熵定义损失函数
+cross=tf.nn.softmax_cross_entropy_with_logits(labels=output_y,logits=logit)
+cost = tf.reduce_mean(cross)#损失均值
+
+
+
+#优化 随机梯度下降 (反向传播优化)
+train=tf.train.AdamOptimizer(learning_rate=1e-4).minimize(cost)
+
+#性能评估：预测的准确率
+#布尔类型
+corr_pred=tf.equal(output_cls,pred)
+#转换类型acc就是预测的结果，以概率的形式反应回来
+acc = tf.reduce_mean(tf.cast(corr_pred,tf.float32))
+#保存训练模型
+save_dir='checkpoint/'
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
+save_path = os.path.join(save_dir,'besetmodel')
+#模型保存对象
+saver=tf.train.Saver()
+
+#训练的批次大小--64--（每次训练要拿多少数据来训练）
+batch_size = 64
+
+def opt(num_iter):
+    #定义训练方法
+    '''
+    训练过程
+    num_iter : 更新迭代的次数
+    return：无返回
+    '''
+    session=tf.Session()
+    #训练模型初始化
+    session.run(tf.global_variables_initializer())
+	#定义最优准确率
+    best_acc=0
+
+    for i in range(num_iter):
+        #产生参与训练的样本
+        x_batch,y_batch=mnist.train.next_batch(batch_size)
+        #执行优化与性能评估　ac 表示每次迭代更新的预测准确率，　_,表示不关心输出是啥
+        _,ac=session.run([train,acc],feed_dict={input_x:x_batch,output_y:y_batch})
+        #
+        if i%100==0:
+            print('迭代次数:{0},准确率：{1}'.format((i+1),ac))
+        if ac>best_acc :
+            best_acc=ac
+            saver.save(sess=session,save_path=save_path)
+
+    #用已经训练好的模型测试输出，测试集第一个样本的标签
+    pred_test = session.run(pred,feed_dict={input_x:mnist.test.images[:1]})
+    print(pred_test)
+    print('正确标签:{0}'.format(mnist.test.cls[:1]))
+
+opt(num_iter=1000)
+
+```
+## **最后模型的参数会保存在checkpoint中**
+
+
+# inception v3模型的应用
+Inception为Google开源的CNN模型，至今已经公开四个版本，每一个版本都是基于大型图像数据库ImageNet中的数据训练而成。因此我们可以直接利用Google的Inception模型来实现图像分类。本篇文章主要以Inception_v3模型为基础。Inception v3模型大约有2500万个参数，分类一张图像就用了50亿的乘加指令。在一台没有GPU的现代PC上，分类一张图像转眼就能完成。
+
+## 模型的使用
+
+## demo_inceptionv3.py
+```python
+'''
+导入所需的库
+ｔｅｎｓｏｒｆｌｏｗ
+inception.py
+
+'''
+import tensorflow as tf
+import inception as inception
+
+#导入inception 模型
+model = inception.Inception()
+#定义要识别的图像  bannel是一根香蕉
+pred=model.classify(image_path='images/bannel.jpg')
+#模型预测--->这里ｋ是打印模型认为最像的１０种可能
+model.print_scores(pred=pred,k=10,only_first_name=True)
+```
+## 预测的结果
+```shell
+99.18% : banana
+ 0.03% : orange
+ 0.01% : fig
+ 0.01% : pineapple
+ 0.01% : lemon
+ 0.01% : zucchini
+ 0.01% : corn
+ 0.01% : butternut squash
+ 0.01% : spaghetti squash
+ 0.01% : Granny Smith
+
+```
+**以上内容将有利于接下来的迁移学习**
+
+# 利用inception V3 进行迁移学习 
