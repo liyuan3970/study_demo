@@ -17,7 +17,7 @@ class TimeItMiddleware(MiddlewareMixin):
 	# 如果在settings 中设置这个ｍｉｄｄｅｌｓｗａｒｅ在第一位置，那么其他的就不执行了
 	def process_request(self,request):
 		return
-	#计算调用view所用的时间，process_request的方法调用后才会执行，func就是要执行的ｖｉｅｗ的方法
+	#计算调用view所用的时间，process_request的方法调用后才会执行，func就是要执行的ｖｉｅｗ的方法，返回和process_request类似
 	def process_view(self,request,func,*args,**kwargs):
 		if request.path != reverse('index'):
 			return None
