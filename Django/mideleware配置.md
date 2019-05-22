@@ -36,4 +36,10 @@ class TimeItMiddleware(MiddlewareMixin):
     def process_response(self,request,response):
     	return response
 ```
+## 在settings中添加middleware 的注册信息
+```python
+MIDDLEWARE = [
+    'index.middleware.TimeItMiddleware'
+]
+```
 ![中间件原理](middleware.png)
