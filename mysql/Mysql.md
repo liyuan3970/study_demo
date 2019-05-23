@@ -83,3 +83,133 @@ where acct_no = '622345000002' or acct_name = ''; -- 或
     insert into enum_test
    values('Jerry','girl','music,dance');--
    ```
+## 改数据
+update 表名称 set 字段1=值1，字段2=值2 where 条件语句
+```sql
+update acct set status =2 where acct_no ='622345000001';
+update acct set balance =2 where acct_no ='622345000003';
+update acct set balance =2 where acct_no ='622345000003';
+```
+## 删除
+delete from 表名称 where 条件表达式；
+```sql
+delete from acct where acct_no ='622345000002';
+```
+## 运算符操作
+1. 比较操作符<,>,>=,<=,<>或!=
+   ```sql
+   select * from acct where balance <5000;
+   select * from acct where status <10 and status>1;
+   select * from acct where acct_no in('622345000002','622345000003');
+   select * from acct where status between 2 and 100;
+   ```
+2. 范围查询
+   ```sql
+   select * from acct where status between 2 and 100;
+   select * from acct where acct_no in('622345000002','622345000003');
+   ```
+## 模糊查询
+```sql
+select * from acct where acct_no like '6%'; -- 6%以6开头任意长度的字符串
+select * from acct where acct_no like '6_'; -- 6_表示6后面跟一个任意字符
+select * from acct where acct_no like '%6%'; -- 表示字符串里面有6的任意字符
+select * from acct where acct_no like '%0005';-- 表示查询已0005结尾的任意字符
+```
+## 空和非空查询
+空和非空的判断(NULL是一个特殊的值)
+判断的时候用is null  或者 is not null
+```sql
+select * from acct where acct_no is null ;
+select * from acct where acct_no ='';
+```
+## 排序
+查询子句 排序 分组<br/> 
+oeder by 字句<br/>
+按照查询结果按照某个字段的值进行排序<br/>
+order by 排序字段 [ASC/DESC]升降 默认是升序<br/>
+按照账户余额进行升序排序<br/>
+```sql
+select * from acct  order by balance ASC;
+select * from acct  order by balance DESC;
+select * from acct  order by acct_tpye asc,balance desc;
+```
+## limit子句 是从0开始的
+```sql
+-- 限制显示查询结果的笔数
+-- 格式limit n显示前面的n行
+-- limit m,n 从m笔开始一直显示n笔，通常用于分页查询  m=(页数-1)*每页几笔  注：经常利用此句来分页  但是容易漏点数据？？？？
+select * from acct  order by balance DESC limit 2;
+select * from acct  limit 1;
+select * from acct  limit 2,3;
+```
+## 聚合函数
+```sql
+select max(balance) from acct; -- 返回的是最大的值
+select avg(balance) from acct; 
+select sum(balance) from acct; 
+select count(*) from acct;-- 避免字段名称，因为空值他不统计
+-- group by 子句：对查询结果进行分组，通常和聚合函数连用，
+-- 格式 group by 分组字段名称
+select count(*), acct_tpye from acct  group by acct_tpye; -- 根据字段依据来分组
+-- 统计每一类账户下面的余额平均值????
+
+select count(*),acct_tpye "账户类型",max(balance) "最大余额" from acct group by acct_tpye;
+
+-- 过滤子句having对分组聚合的结果进行筛选和group子句进行筛选
+-- 格式 group by 分组字段 having 过滤条件
+select count(*),acct_tpye "账户类型" ,sum(balance) from acct group by acct_tpye having acct_tpye is not null;
+-- 
+select count(*),acct_tpye "账户类型" ,sum(balance) from acct group by acct_tpye having acct_tpye is not null order by acct_tpye desc;
+
+select count(*),acct_tpye "账户类型" ,sum(balance) from acct group by acct_tpye having acct_tpye is not null order by acct_tpye desc limit 2;
+
+```
+## 去重
+```sql
+-- distinct子句:select distinct (字段名称) from 表名称  对某个字段进行去重
+-- 看账户表中有多少个账户类型
+select distinct(acct_tpye) from acct; 
+```
+## 改表操作
+```sql
+-- 表结构调整--- 慎用
+
+-- 添加字段 修改字段 删除字段
+
+-- 添加字段，添加到最后一个字段
+-- alter table 表名称 add 字段名称 类型（长度）
+-- 添加到第一个字段
+-- alter table 表名 add 字段名 类型(长度) first
+-- 添加到特定字段后面
+-- alter table 表名 add 字段名 类型(长度) after 字段
+
+create table student(name varchar(32) , num varchar(32) )default charset =utf8;
+alter table student add age int;
+alter table student add id int first;
+alter table student add tel_no varchar(32) after name;
+
+-- 修改字段的类型
+-- alter table 表名 modify 字段名 类型（长度）
+-- 修改字段的名称
+-- alter table 表名 change 旧字段名 新字段名 类型（宽度）
+
+
+alter table student modify name varchar(128);
+alter table student change name name_stu varchar(32);
+
+```
+## 删除字段
+```sql
+-- 删除表字段
+alter table student drop id;
+```
+## SQL难点
+**SQL语句执行的顺序的执行过程（难点）**
+1. 执行from acct                      找打原数据
+2. 执行where过滤                       过滤条件
+3. 执行group by                       进行分组
+4. sum(balance) acct_tpye             统计计算
+5. havingacct_tpye is not null        把聚合后的数据进行过滤
+6. order by acct_tpye desc            排序是为了limit
+7. limit 1                            终于弄完啦
+    
