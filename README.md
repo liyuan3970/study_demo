@@ -1,4 +1,15 @@
 # study_demo
-## what is this
+## what's this
 this is a study demo file create by liyuan3970
+## why do this 
+help my grown faster 
+## how often
+per day!
+## say to myself 
+you will be succeed!
+## contact me
+857956255@qq.com
+1009753802@qq.com
+13585191076
+## other
 
