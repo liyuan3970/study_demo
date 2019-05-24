@@ -212,4 +212,142 @@ alter table student drop id;
 5. havingacct_tpye is not null        把聚合后的数据进行过滤
 6. order by acct_tpye desc            排序是为了limit
 7. limit 1                            终于弄完啦
-    
+
+
+
+## 数据的约束条件
+约束类型：<br>
+1. 非空约束：字段值不能为空（账户金额）
+2. 唯一约束：字段的值不能重复
+3. 主键约束；制定字段作为主键，非空、唯一
+4. 默认值：未填写值的情况下，自动填默认值
+5. 自动增加：字段的值自动增加
+6. 外键约束：在当前表，某个属性不是主键，在另一个表里是主键，参照外键时，外键对应的实体必须存在
+```sql
+-- 非空约束：制定字段的值不能为空，如果插入时没有设置值，并且没有默认值，插入时就会报错，
+-- 语法：字段名称 字段类型 not null （创建的时候）
+create table customer (cust_no varchar(32) not null ,cust_name varchar(32) not null , tel_no varchar(32) not null)
+insert into customer(cust_no,cust_name) values('C0001','Jerry') -- 报错因为tel_no空值
+ 
+
+
+-- 唯一约束
+-- 字段不能重复，语法 字段名称 类型 unique
+create table customer (cust_no varchar(32) unique ,cust_name varchar(32) unique , tel_no varchar(32) unique)
+insert into customer(cust_no,cust_name) values
+('C0001','Jerry','13512345678'),
+('C0001','Jerry','13512345678') -- 报错因为违反了唯一性约束
+
+
+
+-- 主键约束（重点primary key）
+-- 唯一表示一笔记录，要求唯一、非空，PK和一笔记录有唯一对应关系
+-- PK可以是一个属性构成，也可是好几个属性共同构成（证件号码和证件类型；客户编号，微信手机号和邮箱）
+-- 语法 字段名称 字段类型 Primary Key
+-- 主键约束 
+create table customer(cust_no varchar(32) Primary key ,cust_name varchar(32) not null , tel_no varchar(32) not null)；
+insert into customer(cust_no,cust_name) values
+('','Jerry','13512345678')；-- 报错 因为主键不能为空，且唯一
+
+
+-- 默认值
+-- 当插入数据时，该字段如果没有添值，系统会字段添值
+-- 语法 字段名称 类型 default 默认值
+alter table customer add status int default 0 ;-- status 的默认值为0 
+
+
+-- 自动增长
+-- 当字段设置为自动增长时，插入数据不需要添值，数据库系统会自动在上一个值加1
+-- 进场和PK配合使用
+-- 语法 字段名 字段类型 auto_increment
+create table ai_test(id int primary key auto_increment, name varchar(32) );
+insert into ai_test values
+(null,'aaa'), -- id=1
+(null,'bbb'), -- id=2
+(null,'ccc'); -- id=3
+
+
+-- 外键约束(难点)
+-- 外键；在当前表示不是主键，但是在另一个表时主键
+-- 作用：保证参照的完整心、一致性
+-- 使用外键的条件：
+-- 表的存储引擎必须为InnoDB
+-- 被参照字段在另外的表里面必须是主键
+-- 当前表中的字段类型和被参照表中的类型要一致
+-- 语法
+constraint foreign key (当前表字段)
+references 参照表名（参照字段名称）
+
+create table account(acc_no varchar(32) primary key,cust_no varchar(32) not null constraint foreign key(cust_no) references customer(cust_no));
+
+insert into account values
+('0001','C0001'),-- 参照完整性正确可以插入
+('0001','C0004');-- 外键的表里面没有，所以插不进去(参照表里面没有，参照不存在)
+
+delete from customer where cust_no='C0001' ;-- 删不掉（想删除的话，先删除主账号，在删除主表）
+-- 删除外键
+alter table account drop foreign key 外键名
+```
+
+## **数据导入**
+### 导出
+**格式**<br>
+select 查询语句  into outfile '文件路径'<br>
+fields terminated by '字段分隔符'<br>
+lines terminated by '行分割符'<br>
+```sql
+-- 实例
+-- 第一步通过查看数据库允许导出的目录路径
+show variables like 'secure_file%'
+-- 第二部执行导出，文件必须导出到第一步的目录下
+select * from source 
+into outfile 'C:\ProgramData\MySQL\MySQL Server 5.7\Uploads\test.txt' 
+fields terminated by ','
+lines terminated by '\n';
+
+-- test succeed
+select * from orders 
+into outfile 'D:test.txt' 
+fields terminated by ','
+lines terminated by '\n';
+
+-- test 2 succeed
+select * from orders 
+into outfile 'E:python/MySQL/data/test.txt' 
+fields terminated by ','
+lines terminated by '\n';
+
+
+
+
+
+
+select * from acct
+into outfile '\var\lib\mysql-files\acct.bak'
+fields terminated by ','
+lines terminated by '\n';
+
+-- 第三部 查看导出文件
+sudo cat /var/lib/mysql-files/acct.bak
+
+
+
+```
+### 导入
+**格式**<br>
+
+load data infile '备份文件路经'<br>
+into table 表名称<br>
+fields terminated by ','  -- 字段分割符<br>
+lines terminated by '\n'; -- 行分割符<br>
+
+```sql
+load data infile '\var\lib\mysql-files\acct.bak'
+into table acct
+fields terminated by ',' 
+lines terminated by '\n';
+
+```
+**方法二**<br>
+**进入到mysql，source xxx.sql**
+
