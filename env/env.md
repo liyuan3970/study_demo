@@ -36,3 +36,18 @@ python3
 
 ```
 
+# 利用python３自带的命令创建全新的环境
+
+## 在制定目录下创建环境（这个环境是一个超级纯净的环境）
+```python 
+python -m venv /home/liyuan3970/data/git_project/blog/environment
+```
+## 激活环境
+```shell 
+source venv/bin/activate
+```
+
+## 停止环境
+```shell
+. venv/bin/deactivate
+```
