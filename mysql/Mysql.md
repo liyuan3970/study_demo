@@ -418,6 +418,56 @@ with grant option;
 flush privileges; -- 刷新权限
 
 ```
+# 数据库面试题目
+## 事物的特征ACID
+1. 原子性（ATMOICITY）要么全部执行，要么全都不执行
+2. 一致性（CONSISTENCY）一致性，事务执行后，从一个一致性状态到另一个一致性状态
+3. 隔离性（ISOLATIO）事物之间不相互影响、干扰
+4. 持久性（DURABILITY）事物一旦提交，对数据库的修改就必须持久保存
 
 
+
+# **使用python进行Ｍysql操作**
+- 第一步 导入pymysql
+
+- 第二部 建立到数据库服务器的连接，登录数据库，创建连接对象
+
+- 第三部 创建游标对象（cursor），通过调用数据库连接对象获得游标
+
+- 第四部 利用游标对象cursor 对象，执行sql语句
+
+- 第五步 提交事务（如果需要）
+
+- 第六步 关闭游标对象
+
+- 第八步 关闭数据库连接对象
+## 实例对象
+```python
+import pymysql
+host = "localhost"  #服务器地址
+user = "root"       #登录用户名
+password = "123456" #登录密码
+dbname = "bank"     #指定数据库
+conn = pymysql.connect(host, user,password, dbname) 
+cursor = conn.cursor()
+sql = "select * from acct"
+cursor.execute(sql)
+#result = cursor.fetchall()
+result1 = cursor.fetchone()
+result2 = cursor.fetchmany(1)
+
+#print(result1)
+
+#print(result2[:])
+#print(result)
+#for r in result: #r是个元组
+#    acct_no = r[0]
+#    acct_name=r[1]
+#    #print(acct_name,acct_name)#
+cursor.close()
+#关闭数据库连接对象
+conn.close()
+
+
+```
 
