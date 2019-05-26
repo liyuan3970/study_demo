@@ -351,3 +351,30 @@ lines terminated by '\n';
 **方法二**<br>
 **进入到mysql，source xxx.sql**
 
+
+## 子查询
+```sql
+select * from acct where acct_no in(select distinct acct_no from acct_trans_detail)
+```
+说明：先执行子查询在执行外层查询，条件要相互匹配，子查询结果先放到临时表里面的。
+## 连接查询
+
+### 内连接－注意笛卡尔积
+```sql
+select * from acct.acct_no acct.acct_name 
+customer.cust_tel customer.cust_name  
+from acct,customer
+where acct.cust_no = customer.cust_no --关联条件 不会产生笛卡尔积  默认内连接
+```
+### 外链接
+```sql
+select 字段列表 from  表A inner join 表B on 关联条件
+
+
+select a.acct_no ,a.acct_name c.cust_tel from acct a inner join customer c on a.acct_no=c.cust_no
+
+外链接的方式：左连接右连接匹配到就匹配，匹配不到就显示空
+```
+
+
+
