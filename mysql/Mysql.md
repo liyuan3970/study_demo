@@ -374,6 +374,49 @@ select 字段列表 from  表A inner join 表B on 关联条件
 select a.acct_no ,a.acct_name c.cust_tel from acct a inner join customer c on a.acct_no=c.cust_no
 
 外链接的方式：左连接右连接匹配到就匹配，匹配不到就显示空
+
+左连接：左表内容全部显示，用右表显示
+select 字段列表 from 表A 
+left join 表B
+on 关联条件
+
+查询账户，户名，客户电话，如果账户对应的客户不存在，也要显示账户、户名
+select a.acct_no , a.acct_name ,b.cust_tel,
+from acct a
+left join customer c
+on a.cust_no = c.cust_no
+
+右连接 ：格式同上不在复述
+```
+## 授权
+```sql
+grand 权限列表 on 库名称.表名称
+to '用户名'@'客户端地址'[identified by '密码']
+[with grant option]
+说明 ：权限列表表名被授权的用户拥有那些权限
+all privileges :所有权限
+select ,insert, update :分别制定权限
+
+
+
+库名表名
+*.*  表示对所有库所有表进行授权
+bank.* 对bank下的所有表进行授权
+bank.acct 特指对摸个库下的某个表进行授权
+
+
+客户端地址
+% 表示所有客户端
+localhost 本机
+192.168.1.5 表示特定的地址进行登录
+```
+**实例**
+```sql
+grant select on *.* to 'liyuan'@'%' 
+identified by '123456' 
+with grant option;
+flush privileges; -- 刷新权限
+
 ```
 
 
