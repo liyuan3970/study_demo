@@ -8,8 +8,8 @@ per day!
 ## say to myself 
 you will be succeed!
 ## contact me
-857956255@qq.com
-1009753802@qq.com
-13585191076
+- 857956255@qq.com
+- 1009753802@qq.com
+- 13585191076
 ## other
 
