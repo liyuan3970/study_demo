@@ -244,6 +244,224 @@
         Timestamp|	17	|时间戳
 
 
+# Day02
+**db.collection.find(query,field)**<br>
+query: 是一个键值对构成的文档，表达查找条件<br>
+field：是一个键值对构成文档，通过描述某个域的值是1或者0表达是否查找。1表示查找该域0表示不查找。
+findOne(query,field)<br>
+功能： 查找第一条符合条件的文档<br>
+参数： 同find<br>
+## query 的使用
+**比较操作符**
+
+    $eq  等于 = 
+
+    e.g.  年龄等于18
+          db.class0.find({age:{$eq:18}},{_id:0})
+
+    $lt  小于 < 
+
+    e.g.  年龄小于Jack （字符串可以比较大小）
+    db.class0.find({name:{$lt:'Jack'}},{_id:0})
+
+    $gt  大于 >
+	
+    e.g.  大于16小于19的 （表达区间关系）
+    db.class0.find({age:{$gt:16,$lt:19}},{_id:0})
+
+    $lte  小于等于  <=
+    $gte  大于等于  >=
+    $ne   不等于    !=
+
+    $in  包含
+
+    e.g. 查找年龄在数组范围内的文档
+    db.class0.find({age:{$in:[18,19,20]}},{_id:0})
+
+    $nin  不包含
+
+    e.g. 查找年龄不包含在数组中的
+    db.class0.find({age:{$nin:[18,19,20]}},{_id:0})
+
+**逻辑操作符**
+    表示逻辑与
+        1. 在query文档中逗号隔开的多个键值对即表示与关系
+
+	e.g. 年龄18 并且 性别为女
+	     db.class0.find({age:18,sex:'w'},{_id:0})
+
+        2. $and 表示逻辑与
+
+	e.g. 年龄大于17 并且性别为女
+	     db.class0.find({$and:[{age:{$gt:17}},{sex:'w'}]},{_id:0})
+    
+    逻辑或  $or
+
+        e.g. 年龄小于18或者性别为女
+	db.class0.find({$or:[{age:{$lt:18}},{sex:'w'}]},{_id:0})
+    
+    逻辑非  $not
+    
+        e.g.  年龄不大于17
+	db.class0.find({age:{$not:{$gt:17}}},{_id:0})
+
+    逻辑既不也不  $nor	   --> not (A or B)
+
+        e.g.  年龄既不小于17，性别也不为女
+	db.class0.find({$nor:[{age:{$lt:17}},{sex:'w'}]},{_id:0})
+
+
+    条件混合
+        年龄（大于18 或者小于17）并且性别为男的
+	
+	db.class0.find({$or:[{age:{$gt:18}},{age:{$lt:17}}],sex:'m'},{_id:0})
+
+
+	年龄大于等于17的男生，或者 姓名叫Lily
+
+	db.class0.find({$or:[{age:{$gte:17},sex:'m'},{name:'Lily'}]},{_id:0})
+**数组类型查找**
+    数组： 一组数据的有序集合，用[]表示
+          * 有序性
+	  * 数组中的元素可以是不同的数据类型
+
+    查找数组中包含某一项
+	
+	e.g.  查找数组中包含大于90的文档
+	db.class2.find({score:{$gt:90}},{_id:0})
+
+    查找数组中同时包含多项的  $all
+        
+	e.g.  查找数组中同时包含83 88 的
+	db.class2.find({score:{$all:[83,88]}},{_id:0})
+
+    根据数组元素个数查找  $size
+
+        e.g.  查找数组中包含两个元素的
+	db.class2.find({score:{$size:2}},{_id:0})
+
+    选择数组的显示部分 $slice (用于field参数)
+     
+        e.g.  显示数组的前2项
+	db.class2.find({},{_id:0,score:{$slice:2}})
+
+	e.g.  跳过第一项显示后面两项
+	db.class2.find({},{_id:0,score:{$slice:[1,2]}})
+**其他查找操作符**
+    $exists  判断一个域是否存在  值为bool
+    
+    e.g. 查找不存在sex域的文档 （true表示存在，false不存在）
+    db.class0.find({sex:{$exists:false}},{_id:0})
+
+    $mod  通过除数和余数查找文档
+
+    e.g. 查找年龄除以2余数为1的
+    db.class0.find({age:{$mod:[2,1]}},{_id:0})
+
+    $type  根据值的数据类型筛选
+
+    e.g. 查找age数据类型为1的文档
+    db.class0.find({age:{$type:1}},{_id:0})
+
+    * 数据类型和数字对照表参看文档 $type说明
+**数据处理函数**
+    db.collection.distinct(field)
+    功能： 获取某个集合值的范围
+
+    e.g. 获取class0中age域的值
+         db.class0.distinct('age')
+
+    pretty()
+    功能: 将find结果格式化显示
+
+    limit(n)
+    功能： 显示find结果的前n条文档
+    
+    e.g.  显示查找结果的前5条
+    db.class0.find({},{_id:0}).limit(5)
+
+    skip(n)
+    功能： 跳过前n条文档，显示后面的内容
+ 
+    e.g.  跳过前5条文档，显示后面内容
+    db.class0.find({},{_id:0}).skip(5)
+
+
+    count（）
+    功能： 对查找结果统计计数
+    
+    e.g. 统计有多少年来大于17的文档
+    db.class0.find({age:{$gt:17}}).count()
+
+    sort({field:1/-1})
+    功能：对查找文档按照某个域的值排序
+    参数：表示要排序的域
+
+    e.g. 对查找文档按年龄升序排序（1表示升序-1表示降序）
+    db.class0.find({},{_id:0}).sort({age:1})
+
+    复合排序：对多个域进行排序，当第一排序项相同时，参考第二排序项排序
+
+    e.g.  年龄相同时，按照name排序
+    db.class0.find({},{_id:0}).sort({age:1,name:1})
+    函数的连续调用
+
+        * 当一个函数的返回结果仍然是文档集合，可以继续调用函数
+        
+	e.g. 查找年龄最大三名同学文档信息
+	db.class0.find({},{_id:0}).sort({age:-1}).limit(3)
+
+        * 可以对文档集合通过序列号直接选择
+
+        e.g. 获取查找结果第二项
+	     db.class0.find({},{_id:0})[1]
+
+**文档删除操作**<br>
+**mongo :   db.collection.deleteOne(query)**
+	   
+     e.g. 删除第一个年龄小于40的
+	   db.class1.deleteOne({age:{$lt:40}})
+
+	  db.collection.deleteMany(query)
+	  功能：删除所有复合条件的文档
+	  参数： query
+
+	  e.g. 删除所有年龄大于30性别为m的
+	   db.class1.deleteMany({age:{$gt:30},sex:'m'})
+
+	  
+	  db.collection.remove(query,justOne)
+	  功能:删除文档
+	  参数： query 筛选条件
+	         justOne 默认false 此时同deleteMany
+		         设置true  此时同deleteOne
+          
+	  e.g. 删除第一个性别为m的文档
+	  db.class0.remove({sex:'m'},true)
+
+        *  db.student.deleteMany({})可以删除集合中所有文档
+ 
+        db.collection.findOneAndDelete(query)
+	功能： 查找某个文档，并删除
+	参数： query
+	返回： 返回查找到的文档
+	
+	e.g.  查找第一个年龄为17的文档并删除
+	 db.class0.findOneAndDelete({age:17})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
