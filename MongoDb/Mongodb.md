@@ -450,15 +450,222 @@ findOne(query,field)<br>
 	 db.class0.findOneAndDelete({age:17})
 
 
+# **Day03**
+## 修改操作
+**mongo: db.collection.updateOne(query,update,upsert)**<br>
+
+       功能： 修改第一个符合条件的文档
+       参数： query  筛选条件  用法同find query
+             update  要修改的数据项，需要配合修改操作符使用
+	         upsert  bool类型 默认表示没有符合筛选条件的文档则不做任何操作
+	         如果设置为true 则没有筛选到文档就根于query和update插入文档
+
+      e.g.  将Joy年龄修改为18
+      db.class0.updateOne({name:'Joy'},{$set:{age:18}})
+	
+      e.g.  如果没有符合query条件的文档则插入新的文档
+      db.class0.updateOne({name:'Han'},{$set:{age:18}},{upsert:true})
+
+**db.collection.updateMany(query,update,upsert)**<br>
+
+      功能： 修改所有复合条件的文档
+      参数： 同updateOne
+
+      e.g.  同时修改所有符合条件的文档
+      db.class0.updateMany({age:{$lt:18}},{$set:{age:20}})
+**db.collection.update(query,update,upsert,multi)**<br>
+
+      功能: 修改筛选到的文档
+      参数：query 筛选条件
+            update 修改内容
+	    upsert 如果为true则可插入新的文档
+	    multi  默认表示只修改第一条符合条件文档
+	           设置为true表示修改多条
+
+        e.g. 修改所有人年龄为10岁
+	db.class2.update({},{$set:{age:10}},false,true)
+
+**db.collection.findOneAndUpdate(query,update)**<br>
+
+      功能： 查找一个文档并修改
+      参数： query 筛选条件
+             update 修改内容
+      返回： 返回修改之前的文档
+
+      e.g.  查找一个文档并修改年龄为17
+      db.class0.findOneAndUpdate({name:'Lily'},{$set:{age:17}})
+
+**db.collection.findOneAndReplace(query,doc)**<br>
+
+      功能： 查找并替换一个文档
+      参数： query筛选条件
+             doc  替换的文档
+      返回： 返回原有文档
+      
+      e.g.  查找一个文档，并替换为新的文档
+      db.class0.findOneAndReplace({name:'Joy'},{'name':'Jame',age:17,sex:'m'})
+
+## 修改器的使用
+
+$set :  修改一个域的值，或者增加一个域
+
+    e.g.  使用set增加一个name域
+    db.class0.updateOne({name:{$exists:false}},{$set:{name:'Han'}})
+
+$unset:  删除一个域
+
+     e.g.  删除han的age域
+      db.class0.updateOne({name:'Han'},{$unset:{age:''}})
 
 
+$rename : 修改一个域的域名
+
+    e.g.  修改所有sex域名为gender
+    db.class0.updateMany({},{$rename:{sex:'gender'}})
+
+$setOnInsert : 当upsert插入文档时，作为补充的插入内容
+
+    e.g.  当插入新文档时，作为补充插入的 内容
+    db.class0.update({name:'Daivl'},{$set:{age:18},$setOnInsert:{gender:'w'}},{upsert:true})
+
+$inc :  加法修改器
+
+    e.g.  所有文档年龄域加1
+    db.class0.updateMany({},{$inc:{age:1}})
+
+$mul : 乘法修改器
+
+    e.g.  将han年龄乘以2
+     db.class0.updateOne({name:'Han'},{$mul:{age:2}})
+
+**$inc $mul 操作数可以是正数，负数，整数，小数**
 
 
+$max : 指定某个域的值，如果小于规定值则修改为规定值，大于规定值则不变  
 
+    e.g. 如果age小于20则改为20，大于20则不变
+    db.class0.updateOne({name:'Abby'},{$max:{age:20}})
 
+$min : 指定某个域的值，如果大于规定值则修改为规定值，小于规定值则不变  
 
+    e.g.  将年龄大于25的修改为25
+     db.class0.updateMany({},{$min:{age:25}})
 
+## 数组修改器
 
+$push : 向数组中添加一项
+
+    e.g.向数组中增加一项86
+    db.class2.updateOne({name:'小亮'},{$push:{score:86}})
+
+$pushAll: 向数组中增加多项
+
+    e.g.  向数组中增加两项 5,10
+    db.class2.updateOne({name:'小红'},{$pushAll:{score:[5,10]}})
+
+$pull : 从数组中删除某一个值
+  
+    e.g.  删除小红score域中的5
+    db.class2.update({name:'小红'},{$pull:{score:5}})
+
+$pullAll : 同时删除数组中多个值
+
+    e.g.  同时删除数组中的88和10
+    db.class2.update({name:'小红'},{$pullAll:{score:[88,10]}})
+
+$pop : 从数组中弹出一项
+  
+    e.g. 删除小明score中最后一项 （1表示最后一项，-1表示第一项）
+    db.class2.update({name:'小明'},{$pop:{score:1}})
+
+$addToSet : 向数组中添加一项，但是不能添加已有的内容
+
+    e.g.  向数组中添加81，如果已经存在则无法添加
+    db.class2.update({name:'小明'},{$addToSet:{score:81}})
+
+$each : 对多个值进行逐一操作
+
+    e.g.  同时添加90,10
+    db.class2.update({name:'小红'},{$push:{score:{$each:[90,10]}}})
+
+$position: 指定值的插入位置，配合each
+
+    e.g.  向数组1号位置插入5
+    db.class2.update({name:'小明'},{$push:{score:{$each:[5],$position:1}}})
+
+$sort : 对数组排序，搭配each使用
+
+    e.g. 对小明score排序，1升序-1降序
+    db.class2.update({name:'小明'},{$push:{score:{$each:[],$sort:1}}})
+
+## 时间类型
+
+    获取当前时间：
+    1. new Date() 自动生成当前时间
+
+	e.g.
+	db.class1.insertOne({book:'Python入门',date:new Date()})
+
+	2. ISODate() 自动获取当前时间
+	
+	e.g.
+	db.class1.insertOne({book:'Python精通',date:ISODate()})
+
+	3. Date()  获取系统当前时间
+
+        e.g.
+	db.class1.insertOne({book:'Python放弃',date:Date()})
+    
+    存储任意时间
+        
+	ISODate()
+	功能： 将指定的时间字符串转为Mongodb时间存储
+	参数： 指定时间
+	       “2019-01-01 12:12:12”
+	       “20190101 11:11:11”
+	       “20190101”
+        
+	e.g.
+	db.class1.insertOne({book:'Python之美',date:ISODate("2018-11-20 20:58:30")})
+
+## 时间戳
+
+    valueOf()
+    功能： 将ISO date转换为时间戳
+    
+    e.g.  记录1970.1.1 00:00:00到现在多少毫秒
+    db.class1.insertOne({book:'Python涅磐',date:ISODate().valueOf()})
+
+## Null数据类型
+
+    值： null
+
+    1. 表示某个域值为空
+
+    e.g. 表示price域值为空
+     db.class1.insertOne({book:'Python放生',price:null})
+
+    2. 表示某个域不存在
+    
+    e.g. 查找price域为null或者不存在这个域的文档
+    db.class1.find({price:null},{_id:0})
+
+## Object类型（内部文档）
+    文档中某个域的值还是文档，则该值为Object
+
+    * 当使用内部文档的某个域时，需要外部文档域名 . 内部文档域名的方法引用，引用时需要加引号
+
+    e.g. 通过book.title查找
+    db.class3.find({'book.title':'狂人日记'},{_id:0})
+    
+    e.g. 修改边城价格为35
+    db.class3.update({"book.title":'边城'},{$set:{'book.price':35}})
+
+## 通过数组下标直接引用数组项
+    在使用数组时，可以直接通过数组域 . 数组下标操作数组的某一项
+    
+    e.g.  修改小明score中第二项为67
+     db.class2.update({name:'小明'},{$set:{'score.1':67}})
 
 
 
