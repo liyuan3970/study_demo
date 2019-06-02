@@ -668,7 +668,97 @@ $sort : 对数组排序，搭配each使用
      db.class2.update({name:'小明'},{$set:{'score.1':67}})
 
 
+## 创建索引
+    db.collection.createIndex(index,option)
+    功能： 创建索引
+    参数： 索引域 和 索引选项
 
+    e.g. 为name域创建索引
+         db.class0.createIndex({name:1})
+  
+    * _id域会自动生成索引，该索引不能删除
+    * 1 表示正向索引，-1表示逆向索引
+    * 一个集合中不能创建重复的索引
+    
+    查看集合中索引：    
+        db.collection.getIndexes()
+    
+    定义索引名称
+        e.g.  通过索引选项name定义索引名称
+        db.class0.createIndex({age:1},{name:'ageIndex'})
+
+    其他索引创建方法
+
+       ensureIndex()
+       功能：创建索引
+       参数：同createIndex
+   
+       e.g. 创建方法同createIndex
+       db.class0.ensureIndex({gender:1})
+
+       createIndexes([{},{}...])
+       功能： 同时创建多个索引
+       参数： 数组中填写多个索引项即可
+
+       e.g.  同时创建age_-1  gender_-1两个索引
+       db.class0.createIndexes([{age:-1},{gender:-1}])
+
+## 删除索引
+    db.collection.dropIndex()
+    功能：删除一个索引
+    参数: 索引名或者键值对删除
+
+    e.g.  通过名称删除索引
+    db.class0.dropIndex("gender_-1")
+
+    e.g. 通过键值对删除
+    db.class0.dropIndex({age:-1})
+
+    db.collection.dropIndexes()
+    功能： 删除所有索引 （除了_id）
+
+    e.g. 删除class0中所有索引
+        db.class0.getIndexes()
+
+## 索引类型
+
+    复合索引 ： 根据多个域创建一个索引
+
+    e.g. 根据name  age两个域创建一个索引
+         db.class0.createIndex({name:1,age:-1})
+
+    子文档和数组索引：如果对某个域创建索引，该域的值为子文档或者数组，则对数组或者子文档中某一项进行查找也是索引查找。
+
+    e.g. 如果对book创建索引则该查找也是索引查找
+    db.class3.find({'book.title':'围城'},{_id:0})
+
+
+    唯一索引 ： 要求创建索引的域不能有重复的值
+
+    e.g.  对name域创建唯一索引
+    db.class0.createIndex({name:-1},{unique:true})
+
+
+    稀疏索引 ： 会在创建索引时忽略没有指定域的文档
+
+    e.g. 对gender域创建稀疏索引
+    db.class0.createIndex({gender:1},{sparse:true})
+
+## 聚合操作
+    对文档数据进行整理筛选统计
+
+    db.collection.aggregate()
+    功能： 完成聚合操作
+    参数： 聚合条件，需要配合聚合操作符
+
+    聚合操作符
+
+    $group  分组聚合 往往需要配合一定的统计操作符完成
+   
+       统计求和： $sum 
+       
+       e.g. 按照性别分组，获取每组人数
+       db.class0.aggregate({$group:{_id:'$gender',num:{$sum:1}}})
 
 
 
