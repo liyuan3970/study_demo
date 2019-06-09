@@ -11,3 +11,18 @@ DATABASES = {
     }
 }
 ```
+# 安装mysql-client
+```shell
+pip install mysqlclient
+```
+
+# 方法二
+在settings.py所在的目录里寻找__init__.py<br>
+pip install pymysql<br>
+编写如下代码
+```python
+#__init__.py
+import pymysql
+pymysql.install_as_MySQLdb()
+
+```
