@@ -1,4 +1,5 @@
 # 在settings里面配置mysql数据库
+# 方法一
 ```python 
 DATABASES = {
     'default': {
