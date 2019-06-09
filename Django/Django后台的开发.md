@@ -137,6 +137,7 @@ class CategoryOwnerFilter(admin.SimpleListFilter):
 
 @admin.register(Post ,site=custom_site)
 class PostAdmin(BaseOwnerAdmin):
+    # 在PostAdmin上指明要求改对应字段的小部件
     form = PostAdminForm
     # operator是字段外的字段，这个定义意味着可以相admin后台自定义显示的字段
     list_display = [
@@ -242,4 +243,140 @@ class CustomSite(AdminSite):
 #这一句的意思就是指明站点归属
 custom_site = CustomSite(name='cus_admin')
 
+```
+
+# 修改后台展示的小部件(form在admin上的应用)
+**我们要修改PostAdmin对应的desc（摘要）的展示方式为多行文本**
+<br>在对应models对应的目录下创建adminforms.py
+```python
+from django import forms
+
+
+class PostAdminForm(forms.ModelForm):
+    desc = forms.CharField(widget=forms.Textarea, label='摘要', required=False)
+```
+## 创建的小部件
+```python
+from django import forms
+from .models import *
+
+
+#为level控件准备初始化数据
+LEVEL_CHOICE = (
+  ('1','好评'),
+  ('2','中评'),
+  ('3','差评'),
+)
+
+#表示评论内容的表单控件们
+#控件1-评论标题(title)-文本框
+#控件2-Email(email)-Email框
+#控件3-评论内容(message)-Textarea
+#控件4-评论级别(level)-Select
+#控件5-是否保存(isSaved)-Checkbox
+
+class RemarkForm(forms.Form):
+  # 控件1-评论标题(title)-文本框
+  # label : 表示控件前的文本
+  title = forms.CharField(label='标题')
+  # 控件2-Email(email)-Email框
+  email = forms.EmailField(label='邮箱')
+  # 控件3-评论内容(message)-Textarea
+  # widget=forms.Textarea 目的是将当前控件变为多行文本框
+  message = forms.CharField(label='内容',widget=forms.Textarea)
+  # 控件4-评论级别(level)-Select
+  level = forms.ChoiceField(label='级别',choices=LEVEL_CHOICE)
+  # 控件5-是否保存(isSaved)-Checkbox
+  isSaved = forms.BooleanField(label='是否保存')
+
+# class RegisterForm(forms.Form):
+class RegisterForm(forms.ModelForm):
+  # 自定义属性
+  # uname = forms.CharField(label='用户名称')
+  # upwd = forms.CharField(label='用户密码')
+  # uage = forms.IntegerField(label='用户年龄')
+  # uemail = forms.EmailField(label='电子邮箱')
+
+  # 将Model类与Form相结合
+  class Meta:
+    # 1.指定关联的实体类 - model
+    model = Users
+    # 2.指定要显示的控件 - fields
+    # fields = "__all__"
+    fields = ["uname","uage"]
+    # 3.指定每个属性对应的labels - labels
+    labels = {
+      'uname': '名称',
+      'uage': '年龄',
+    }
+
+
+class LoginForm(forms.Form):
+  uname = forms.CharField(
+    label='姓名',
+    widget=forms.TextInput(
+      attrs={
+        'placeholder':'请输入姓名',
+        'class':'form-input'
+      }
+    ))
+
+  upwd = forms.CharField(
+    label='密码',
+    widget=forms.PasswordInput(
+      attrs = {
+        'placeholder':'请输入密码',
+        'class':'form-input'
+      }
+    )
+  )
+##########################################################################################################################################################
+#
+#		1.什么是小部件
+#			要生成到网页上的控件
+#		2.常用小部件类型
+#			1.TextInput : type='text'
+#			2.PasswordInput : type='password'
+#			3.NumberInput : type='number'
+#			4.EmailInput : type="email"
+#			5.HiddenInput : type='hidden'
+#			6.CheckboxInput : type='checkbox'
+#			7.CheckboxSelectMultiple : type='checkbox'
+#				允许生成多个
+#			8.RadioSelect : type="radio"
+#				允许生成多个
+#			9.Textarea : <textarea>
+#			10.Select : <select>
+#			11.SelectMultiple " <select multiple>
+#		3.小部件的使用
+#			1.继承自 forms.Form
+#				1.基本版
+#					1.语法
+#						属性 = forms.CharField(
+#							label = 'xxx',
+#							widget = forms.小部件类型
+#						)
+#						属性 = forms.ChoiceField(
+#							label = 'xxx',
+#							widget = forms.小部件类型
+#						)
+#					2.示例
+#						upwd = forms.CharField(
+#							label = '用户密码',
+#							widget = forms.PasswordInput
+#						)
+#				2.高级版
+#					1.特点
+#						在指定控件类型的基础上还能指定控件的一些html属性
+#					2.语法
+#						属性 = forms.CharField(
+#							label = 'xxx',
+#							widget = forms.小部件类型(
+#								attrs = {
+#									'html属性名':'值',
+#									'html属性名':'值',
+#								}
+#							)
+#						)                        
+##########################################################################################################################################################
 ```
