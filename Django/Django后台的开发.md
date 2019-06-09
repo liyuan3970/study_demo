@@ -79,6 +79,7 @@ from .models import *
 from django.urls import reverse
 from django.utils.html import format_html
 from .adminforms import PostAdminForm
+# 用来配置对应站点的数据
 from My_blog.custom_site import custom_site
 from My_blog.base_admin import BaseOwnerAdmin
 from django.contrib.admin.models import LogEntry
@@ -211,4 +212,34 @@ class PostAdmin(BaseOwnerAdmin):
 # 定义后台的日志文件
 class LogEntryAdmin(admin.ModelAdmin):
     list_display = ['object_repr', 'object_id', 'action_flag', 'user', 'change_message']
+```
+
+# 配置多个后台，不同后台展示不同的内容
+## 修改urls.py
+```python 
+from django.conf.urls import url
+from django.contrib import admin
+# 在urls.py对应的目录下新建的custom_site类
+from .custom_site import custom_site
+urlpatterns = [
+    # 两个后台站点对应如下url
+    url(r'^super_admin/', admin.site.urls),
+    url(r'^admin/', custom_site.urls),
+]
+
+```
+## 配置对应的admin站点后台展示
+```python 
+from django.contrib.admin import AdminSite
+
+
+class CustomSite(AdminSite):
+    #后台展示头部的相关信息修改
+    site_header = '小飞侠'
+    site_title = '我的博客后台'
+    index_title = '首页'
+
+#这一句的意思就是指明站点归属
+custom_site = CustomSite(name='cus_admin')
+
 ```
