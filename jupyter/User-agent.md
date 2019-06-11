@@ -23,3 +23,10 @@ jupyter notebook
 ```shell
 jupyter nbconvert --to markdown "day01.ipynb"
 ```
+
+# 在jupyter上绘制matplotlib图片
+```python
+import numpy as np
+%matplotlib inline
+import matplotlib.pyplot as mp
+```
