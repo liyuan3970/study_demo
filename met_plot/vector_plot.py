@@ -2,10 +2,16 @@ import netCDF4 as nc
 import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
 import numpy as np
-obj=nc.Dataset('I:\\Python_related\\850hPa_uv_global_1mon_4daily.nc')
-u=obj.variables['u'][0,35:76,70:141]
-v=obj.variables['v'][0,35:76,70:141]
-lat=obj.variables['latitude'][:];lon=obj.variables['longitude'][:]
+obj=nc.Dataset('EC-Interim_monthly_2018.nc')
+
+t2m=obj.variables['t2m'][0,0:41,0:71]
+
+lat=obj.variables['latitude'][:]
+lon=obj.variables['longitude'][:]
+
+
+
+
 m=Basemap(projection='cyl',llcrnrlat=15,urcrnrlat=55,llcrnrlon=70,urcrnrlon=140,resolution='l')
 lons,lats=m.makegrid(71,41)
 lats=lats[::-1]
