@@ -1,0 +1,1 @@
+/home/liyuan3970/data/nc/1948/slp.mon.mean.nc
