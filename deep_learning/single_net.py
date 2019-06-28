@@ -82,7 +82,7 @@ def viewData(datas,lbls):
 神经元通过一次计算后的值并不是1或者0，我们需要一个函数（激活函数）对所计算的实际y值进行加工，使其变成1或0
 '''
 def f(x):
-    return 1 if x>0 else 0
+    return 1/(1+np.exp(-x)) if x>0 else 0
 
 
 
