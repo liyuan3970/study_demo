@@ -4,6 +4,12 @@ python -m venv env
 
 ```
 
+## 启动新的环境
+
+```shell
+source env/bin/acivate 
+
+```
 ## 更新pip@wheel
 
 ```shell
@@ -12,6 +18,7 @@ pip install --upgrade pip
 pip install --upgrade wheel
 
 ```
+
 
 ## 利用豆瓣的源安装第三方的库
 
