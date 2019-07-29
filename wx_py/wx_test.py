@@ -48,6 +48,7 @@ bot=Bot(cache_path=True)
 
 @bot.register() # 接收从指定好友发来的消息，发送者即recv_msg.sender为指定好友girl_friend
 def recv_send_msg(recv_msg):
+    #业务逻辑代码
     print('收到的消息：',recv_msg.text) # recv_msg.text取得文本
     return '今夜台州气温15度'
 
