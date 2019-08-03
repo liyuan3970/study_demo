@@ -17,10 +17,10 @@ def recv_send_msg(recv_msg):
     # 附加功能：增加消息记录的功能
     print('收到的消息：',recv_msg.text) # recv_msg.text取得文本
     if recv_msg.text == '1':
-        return '今夜玉环气温15度'
+        return '1111111111111'
     elif recv_msg.text == '2':
-        return '今夜玉环风速'
-    #return '您好，这里是玉环气象局，现在微信播报天气服务信息...,查询气温请按1,播报天气请按2'
+        return '22222222222'
+    return '您好，一个微信机器人，按1，按2试试'
 
 
 # 功能二 ：主动推送消息给一些人
