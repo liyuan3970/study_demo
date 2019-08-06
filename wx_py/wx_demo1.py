@@ -6,6 +6,32 @@ from threading import Thread
 bot=Bot(cache_path=True)
 
 
+####　　　　　　　　测试代码
+###################################################################################
+
+
+# 机器人账号自身
+myself = bot.self
+
+print("机器人自身：",myself)
+
+allfriends = bot.friends()
+
+print("机器人的所有好友：",allfriends)
+
+allgroups = bot.chats(update=False)
+## 打印的是所有的微信的聊天对象
+print("机器人的聊天对象：",allgroups)
+
+
+
+#####################################################################################
+
+
+
+
+
+
 friend = bot.friends().search('liyuan')[0]
 print(friend)
 

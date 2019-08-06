@@ -15,6 +15,47 @@ from tkinter import ttk
 '''
 
 
+
+
+
+##########################　　　　　　　　用户数据　　　　　　###########################
+
+###################################################################################
+#global friends,groups,friend_list
+
+groups = ['name1','name1','name1','name1','name1','name1','name1','name1','name1','name1']
+
+friends = ['friend1','friend1','friend1','friend1',
+'friend1','friend1','friend1','friend1','friend1',
+'friend1','friend1','friend1','friend1','friend1',
+'friend1','friend1','friend1','friend1','friend1',
+'friend1','friend1','friend1','friend1','friend1',
+'friend1','friend1','friend1','friend1','friend1',
+'friend1','friend1','friend1','friend1','friend1',
+'friend1']
+##################################################################################
+
+'''定义按键函数'''
+# def fun_name_list(friends,friend_list):
+#     friends = friends
+#     print("111111111111")
+#     friend_list = friend_list
+#     for item in friends:
+#         friend_list.insert("end", item)
+#     friend_list.place(x=10,y=140,width=255,height =450 )
+#
+# def fun_name_group(groups,friend_list):
+#     groups = groups
+#     print("222222222222")
+#     friend_list = friend_list
+#     for item in groups:
+#         friend_list.insert("end", item)
+#     friend_list.place(x=10,y=140,width=255,height =450 )
+
+
+
+###################################################################################
+
 chat = tk.Tk()             #初始化Tk()
 chat.title("Electronic WeChat")#
 chat.geometry('800x600')                 #窗口大小*
@@ -41,17 +82,49 @@ search = tk.Entry(frame1).place(x=10,y=52,width=255,height =30)
 
 name_pic = tk.Button(frame1,text = 'name',bg='white').place(x=10,y=10,width=40,height =40 )
 
-name_list = tk.Button(frame1,text = 'list',bg='white').place(x=30,y=90,width=40,height =40 )
+
 
 name_artical = tk.Button(frame1,text = 'artical',bg='white').place(x=120,y=90,width=40,height =40 )
 
-name_all = tk.Button(frame1,text = 'all',bg='white').place(x=210,y=90,width=40,height =40 )
-
-friend_list = tk.Listbox().place(x=10,y=140,width=255,height =450 )
 
 
+friend_list = tk.Listbox(frame1)#.place(x=10,y=140,width=255,height =450 )
+
+
+def fun_name_list():
+    #friends = friends
+    print("111111111111")
+    friend_list.delete(0,'end')
+    l=[]
+    l=friends
+    #friend_list = friend_list
+    for item in l:
+        friend_list.insert("end", item)
+    friend_list.place(x=10,y=140,width=255,height =450 )
+
+def fun_name_group():
+    #groups = groups
+    friend_list.delete(0,'end')
+    print("222222222222")
+    l=[]
+    l=groups
+    #friend_list = friend_list
+    for item in l:
+        friend_list.insert("end", item)
+    friend_list.place(x=10,y=140,width=255,height =450 )
+
+
+
+
+name_list = tk.Button(frame1,text = 'list',bg='white',command = fun_name_group).place(x=30,y=90,width=40,height =40 )
+
+name_all = tk.Button(frame1,text = 'all',bg='white',command = fun_name_list)
+
+name_all.place(x=210,y=90,width=40,height =40 )
+#for item in friends:
+#    friend_list.insert("end", item)
+#friend_list.place(x=10,y=140,width=255,height =450 )
 #########################################################################################
-
 
 
 #########################################################################################
