@@ -1,4 +1,4 @@
-# -*- coding: UTF8 -*-
+
 
 import tkinter as tk
 
