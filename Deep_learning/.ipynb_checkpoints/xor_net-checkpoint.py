@@ -17,8 +17,8 @@ Y = np.array([[0,1,1,0]])
 # 权重初始化，取值范围-1到1
 V = np.random.random((3,4))*2-1
 W = np.random.random((4,1))*2-1
-print('输入层连接隐藏层的权值V：',V)
-print('隐藏层连接输出层的权值W：',W)
+#print('输入层连接隐藏层的权值V：',V)
+#print('隐藏层连接输出层的权值W：',W)
 
 def sigmoid(x):
     return 1/(1+np.exp(-x))
@@ -60,5 +60,4 @@ def main():
     print('最后逼近值：',L2)
 
 if __name__ == "__main__":
-    print("#############")
-    #main()
+    main()
