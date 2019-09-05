@@ -471,3 +471,17 @@ conn.close()
 
 ```
 
+## 导出数据库
+```sql
+mysqldump -uroot -p typeidea_db >typediea.sql
+
+```
+
+## 导入数据库
+
+```sql
+1. 创建数据库
+2.使用数据库
+3.source ***.sql 
+
+```
