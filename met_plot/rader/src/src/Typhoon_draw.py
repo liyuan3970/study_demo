@@ -96,6 +96,7 @@ with open('CN-border-La.dat') as src:
  
 
 path = '/Users/zhpfu/Dropbox/Code_Fortress/00_My_Python_Library/Typhoon/GRIDSAT-B1.2016.07.07.06.v02r01.nc'
+#path = '/home/liyuan3970/'
 
 # Search for the Scan start in the file name  2016.07.07.06
 Start = (path[path.find("B1.")+3:path.find(".v02")])
