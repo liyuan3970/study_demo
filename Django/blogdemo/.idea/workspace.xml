@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ae71976-3ecd-49fa-945f-87db9f1e0bec" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Deep_learning/tensorflow/.ipynb_checkpoints/tensorflow学习-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../Deep_learning/tensorflow/.ipynb_checkpoints/tensorflow学习-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Deep_learning/tensorflow/tensorflow学习.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../Deep_learning/tensorflow/tensorflow学习.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.ipynb_checkpoints/Django的开发流程-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../.ipynb_checkpoints/Django的开发流程-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Django的开发流程.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../Django的开发流程.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../met_plot/rader/pup/.ipynb_checkpoints/Rader_demo-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../met_plot/rader/pup/.ipynb_checkpoints/Rader_demo-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../met_plot/rader/pup/Rader_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../met_plot/rader/pup/Rader_demo.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="74" />
+            <state relative-caret-position="120">
+              <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -115,7 +113,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/test_demo/seleum" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -177,7 +175,8 @@
       <workItem from="1570440385474" duration="3159000" />
       <workItem from="1570528272073" duration="102000" />
       <workItem from="1570601487716" duration="6641000" />
-      <workItem from="1570690793073" duration="597000" />
+      <workItem from="1570690793073" duration="625000" />
+      <workItem from="1570797771348" duration="50000" />
     </task>
     <task id="LOCAL-00001" summary="url的配置">
       <created>1570524716147</created>
@@ -197,12 +196,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21220000" />
+    <option name="totallyTimeSpent" value="21298000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="710" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2740458" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27938932" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -216,7 +215,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19715808" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19893429" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -288,8 +287,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="74" />
+        <state relative-caret-position="120">
+          <caret line="8" column="32" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
