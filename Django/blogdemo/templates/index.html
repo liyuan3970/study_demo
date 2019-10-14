@@ -8,7 +8,10 @@
 </head>
 <body>
 
-   <iframe src="http://www.baidu.com" width="400%" height="400%" frameborder="0"></iframe>
+{#   <iframe src="http://www.baidu.com" width="400%" height="400%" frameborder="0"></iframe>#}
+   <div align="center">
+       <iframe width="800" height="600" src="http://www.baidu.com" scrolling="no" hspace="-100" vspace="-150"></iframe>
+   </div>
    {% for t in tag %}
       <div>{{t.tag_name}}</div>
    {% endfor %}
