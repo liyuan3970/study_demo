@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog</title>
+</head>
+<body>
+
+   {% for p in post %}
+       ****************************
+       <div>{{p.post_name}}</div>
+       <div>{{p.auther}}</div>
+       <div>{{p.tag}}</div>
+       <div>{{p.content}}</div>
+       ****************************
+   {% endfor %}
+   <div>下面是配置list的分页行</div>
+   <div>
+    {% if page_obj %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+        {% endif %}
+        Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+        {% endif %}
+
+    {% endif %}
+    </div>
+</body>
+</html>
