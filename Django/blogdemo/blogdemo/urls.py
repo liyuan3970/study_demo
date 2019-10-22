@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from index.views import Listviews,Detailviews
+from index.views import Listviews,Detailviews,MainList,PostCreate
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^',include('index.urls')),
     url(r'^list$', Listviews.as_view()),
     url(r'^detail$', Detailviews.as_view()),
+    url(r'^main$', MainList.as_view(), name='main'),
+    url(r'^add', PostCreate.as_view(), name='post_add'),
+    # url(r'^post_update/(?P<pk>\d+)$', PostUpdate.as_view(), name='post_update'),
+    # url(r'^delete/(?P<pk>\d+)$', views.PostDelete.as_view(), name='post_delete'),
 ]

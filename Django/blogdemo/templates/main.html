@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blog</title>
+</head>
+<body>
+
+
+<ul>
+    {% for p in post %}
+    <li>{{ p.id }} &nbsp &nbsp {{ p.post_name }} &nbsp &nbsp{{ p.time }}&nbsp &nbsp{{ p.auther }} &nbsp &nbsp
+        {{ p.tag }} &nbsp &nbsp&nbsp &nbsp&nbsp &nbsp:
+{#    <a href="{% url "post_update" p.id %}">修改</a>#}
+{#    <a href="{% url "post_delete" p.id %}">删除</a>#}
+    </li>&nbsp
+    {% endfor %}
+</ul>
+
+<a href="{% url "post_add" %}">新增</a>
+
+
+</body>
+</html>
