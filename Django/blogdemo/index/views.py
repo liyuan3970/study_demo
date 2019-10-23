@@ -47,13 +47,15 @@ class MainList(ListView):
     template_name = 'main.html'
     context_object_name = 'post'
 
-# class PostUpdate(UpdateView):
-#     model = Post
-#     success_url = reverse_lazy('main')
-#     fields = ['id', 'name', 'time','post_name', 'auther', 'tag','content']
-#     template_name = 'detail.html'
+class PostUpdate(UpdateView):
+    model = Post
+    success_url = reverse_lazy('main')
+    fields = ['id', 'time','post_name', 'auther', 'tag','content']
+    template_name = 'Post_form.html'
+
 class PostCreate(CreateView):
     model = Post
+    # 成功后的url
     success_url = reverse_lazy('main')
     fields = ['id', 'time','post_name', 'auther', 'tag','content']
     template_name = 'Post_form.html'
