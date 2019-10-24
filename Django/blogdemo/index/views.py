@@ -68,3 +68,14 @@ class PostCreate(CreateView):
     #     }
     #     #如果没有有效提交，则仍留在原来页面
     #     return render(request, 'main.html',  context)
+def funcpost(request):
+    if request.method == 'GET':
+        return render(request, 'funcpost.html')
+    else:
+        post_name = request.POST.get('post_name')
+        time = request.POST.get('time')
+        auther = request.POST.get('auther')
+        tag = request.POST.get('tag')
+        content = request.POST.get('content')
+
+        return HttpResponse('获取请求数据成功')

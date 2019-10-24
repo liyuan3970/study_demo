@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from index.views import Listviews,Detailviews,MainList,PostCreate,PostUpdate
+from index.views import Listviews,Detailviews,MainList,PostCreate,PostUpdate,funcpost
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^add', PostCreate.as_view(), name='post_add'),
     url(r'^post_update/(?P<pk>\d+)$', PostUpdate.as_view(), name='post_update'),
     # url(r'^delete/(?P<pk>\d+)$', views.PostDelete.as_view(), name='post_delete'),
+    # post的函数版url
+    url(r'^funcpost/$',funcpost),
 ]

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <form action="/funcpost/" method="post">
+    {% csrf_token %}
+    <p>
+      文章名称: <input type="test" name="post_name">
+    </p>
+    <p>
+      时间: <input type="text" name="time">
+    </p>
+    <p>
+      作者: <input type="text" name="auther">
+    </p>
+
+    <p>
+      类别: <input type="text" name="tag">
+    </p>
+    <p>
+      内容: <input type="text" name="content">
+    </p>
+
+
+    <p>
+      <input type="submit" value="提交">
+    </p>
+  </form>
+</body>
+</html>
