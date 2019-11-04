@@ -16,9 +16,14 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from index.views import Listviews,Detailviews,MainList,PostCreate,PostUpdate,funcpost
+import xadmin
+from index.apis import post_list,PostList
+
+from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'xadmin/', include(xadmin.site.urls)),
     url(r'^',include('index.urls')),
     url(r'^list$', Listviews.as_view()),
     url(r'^detail$', Detailviews.as_view()),
@@ -28,4 +33,11 @@ urlpatterns = [
     # url(r'^delete/(?P<pk>\d+)$', views.PostDelete.as_view(), name='post_delete'),
     # post的函数版url
     url(r'^funcpost/$',funcpost),
+    #apis-rest-frame
+    #url(r'^api/post/',post_list,name = 'post-list'),
+    url(r'^api/post/',PostList.as_view(),name = 'post-list'),
+
+    #配置文档
+    url(r'^api/docs/',include_docs_urls(title='blog-api-docs')),
+
 ]
