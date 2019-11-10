@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="7ae71976-3ecd-49fa-945f-87db9f1e0bec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../Deep_learning/tensorflow/CNN.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../Deep_learning/tensorflow/CNN.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../met_plot/rader/pup/.ipynb_checkpoints/test_demo-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../met_plot/rader/pup/.ipynb_checkpoints/test_demo-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../met_plot/rader/pup/test_demo.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../met_plot/rader/pup/test_demo.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../python_tools/matplotlib/.ipynb_checkpoints/Matplotlib-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../python_tools/matplotlib/.ipynb_checkpoints/Matplotlib-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../python_tools/matplotlib/Matplotlib.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../python_tools/matplotlib/Matplotlib.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,19 +17,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/blogdemo/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+            <state relative-caret-position="145">
+              <caret line="40" column="13" lean-forward="true" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="571">
+              <caret line="79" selection-start-line="79" selection-end-line="79" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blogdemo/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
+            <state relative-caret-position="364">
               <caret line="43" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <element signature="e#642#682#0" expanded="true" />
@@ -121,7 +138,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/data/python/python/web_frame/ajax" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -200,6 +217,7 @@
       <workItem from="1573023985380" duration="626000" />
       <workItem from="1573024704491" duration="77000" />
       <workItem from="1573130436774" duration="583000" />
+      <workItem from="1573351024410" duration="1064000" />
     </task>
     <task id="LOCAL-00001" summary="url的配置">
       <created>1570524716147</created>
@@ -247,13 +265,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53709000" />
+    <option name="totallyTimeSpent" value="54773000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1366" height="710" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24122137" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24580152" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -267,7 +284,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.59325045" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.26998225" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -359,16 +376,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="79" selection-start-line="79" selection-end-line="79" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index/adminx.py" />
     <entry file="file://$PROJECT_DIR$/index/urls.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -384,18 +391,8 @@
     <entry file="file://$PROJECT_DIR$/index/apis.py" />
     <entry file="file://$PROJECT_DIR$/blogdemo/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blogdemo/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-          <folding>
-            <element signature="e#642#682#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="145">
+          <caret line="40" column="13" lean-forward="true" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -403,6 +400,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
           <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="571">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blogdemo/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+          <folding>
+            <element signature="e#642#682#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
