@@ -1,0 +1,37 @@
+---
+name: 200种鸟类分类
+author: 李渊
+description: 200种鸟类分类
+topic: 200种鸟类分类
+algorithm: CNN
+language: python3
+virtualenv: flyai_env/bin/
+
+framework: TensorFlow
+
+data:
+  id: BirdClassification
+  name: 200种鸟类分类
+  category: image
+model:
+  processor: Processor
+  input_x: input_x
+  input_y: input_y
+  output_y: output_y
+  input:
+    columns:
+      - name: image_path
+        type: string
+    to_type: float
+    to_shape: [-1,80, 80, 3]
+  output:
+    columns:
+      - name: label
+        type: int
+    to_type: float
+    to_shape: [-1,200]
+
+servers:
+  - id: flyai
+    url: https://flyai.com
+...
