@@ -1,10 +1,10 @@
 ---
 name: 手写数字图片MNIST
-author: liyuan3970
+author: 李渊
 description: 手写数字图片MNIST
 topic: 手写数字图片MNIST
 algorithm: CNN
-language: Python3
+language: flyai_env/bin/
 
 framework: Tensorflow
 
@@ -30,9 +30,7 @@ model:
       - name: label
         type: int
     to_type: int
-    to_shape: [10]
-evaluate:
-  score: keras_accuracy
+    to_shape: [-1，10]
 servers:
   - id: flyai
     url: https://flyai.com

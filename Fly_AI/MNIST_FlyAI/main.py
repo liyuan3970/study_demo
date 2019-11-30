@@ -25,7 +25,7 @@ Keras模版项目下载： https://www.flyai.com/python/keras_template.zip
 项目中的超参
 '''
 parser = argparse.ArgumentParser()
-parser.add_argument("-e", "--EPOCHS", default=1000, type=int, help="train epochs")
+parser.add_argument("-e", "--EPOCHS", default=500, type=int, help="train epochs")
 parser.add_argument("-b", "--BATCH", default=32, type=int, help="batch size")
 args = parser.parse_args()
 
