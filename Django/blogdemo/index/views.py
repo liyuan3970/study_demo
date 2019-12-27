@@ -7,12 +7,41 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
 
 from django.core.urlresolvers import reverse_lazy
+from matplotlib.figure import Figure  
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+from matplotlib.dates import DateFormatter
+import matplotlib.pyplot as plt
+import random
+import datetime
+import base64
+from io import BytesIO
 # Create your views here.
 def index(request):
     tag = Tag.objects.all()
     post = Post.objects.raw('select * from index_post')
     auther = Auther.objects.raw('select id,auther_name from index_auther')
     return render(request,'index.html',locals())
+
+def plot(request):
+    fig=Figure(figsize=(6,6))
+    ax=fig.add_subplot(111)
+    x=[]
+    y=[]
+    now=datetime.datetime.now()
+    delta=datetime.timedelta(days=1)
+    for i in range(10):
+        x.append(now)
+        now+=delta
+        y.append(random.randint(0, 1000))
+    ax.plot_date(x, y, '-')
+    ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d'))
+    fig.autofmt_xdate()
+    canvas=FigureCanvasAgg(fig)
+    response=HttpResponse(content_type='image/png')
+    canvas.print_png(response)
+    plt.close(fig)
+    return response
+    #return HttpResponse('获取请求数据成功')
 
 class Listviews(ListView):
     # 定义查询数据的数据表
