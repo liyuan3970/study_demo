@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, redirect
-
+import numpy as np
 from django.core.urlresolvers import reverse_lazy
 from matplotlib.figure import Figure  
 from matplotlib.backends.backend_agg import FigureCanvasAgg
@@ -23,25 +23,14 @@ def index(request):
     return render(request,'index.html',locals())
 
 def plot(request):
-    fig=Figure(figsize=(6,6))
-    ax=fig.add_subplot(111)
-    x=[]
-    y=[]
-    now=datetime.datetime.now()
-    delta=datetime.timedelta(days=1)
-    for i in range(10):
-        x.append(now)
-        now+=delta
-        y.append(random.randint(0, 1000))
-    ax.plot_date(x, y, '-')
-    ax.xaxis.set_major_formatter(DateFormatter('%Y-%m-%d'))
-    fig.autofmt_xdate()
-    canvas=FigureCanvasAgg(fig)
-    response=HttpResponse(content_type='image/png')
-    canvas.print_png(response)
-    plt.close(fig)
-    return response
-    #return HttpResponse('获取请求数据成功')
+    fig = Figure()
+    ax = fig.subplots()
+    ax.plot([1, 2])
+    FigureCanvasAgg(fig)
+    buf = BytesIO()
+    fig.savefig(buf, format='png')
+    data = base64.b64encode(buf.getbuffer()).decode('ascii')
+    return HttpResponse(f"<img src='data:image/png;base64,{data}'/>")
 
 class Listviews(ListView):
     # 定义查询数据的数据表
