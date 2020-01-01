@@ -31,6 +31,12 @@ from mpl_toolkits.basemap import Basemap
 
 
 import cartopy.crs as ccrs
+
+
+import cinrad
+import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm, colors
 # Create your views here.
 def index(request):
     tag = Tag.objects.all()
@@ -89,6 +95,84 @@ def plotmap2(request):
     plt.figure(figsize=(6, 3))
     ax = plt.axes(projection=ccrs.PlateCarree(central_longitude=180))
     ax.coastlines(resolution='110m')
+    FigureCanvasAgg(fig)
+    buf = BytesIO()
+    plt.savefig(buf, format='png')
+    #fig.savefig(buf, format='png')
+    data2 = base64.b64encode(buf.getbuffer()).decode('ascii')
+    return HttpResponse(f"<img src='data:image/png;base64,{data2}'/>")
+
+def plotmap3(request):
+    #fig = Figure()
+    fig = plt.figure()
+    # ncl调色板的配置
+    filepath = '/home/liyuan3970/study_demo/met_plot/rader/pup/'
+    fid = open(filepath+'radar.rgb')
+    data=fid.readlines()
+    n=len(data);
+    #print(n)
+    rgb=np.zeros((n,3))
+    for i in np.arange(n):
+        #print(data[0].split(' '))
+        rgb[i][0]=float(data[i].split(' ')[0])
+        rgb[i][1]=data[i].split(' ')[1]
+        rgb[i][2]=data[i].split(' ')[2]
+    print((rgb.shape))
+    #print(rgb[253])
+    cmaps= colors.ListedColormap(rgb)
+    #matplotlib.use('TkAgg')
+    f = cinrad.io.CinradReader(filepath+'Z_RADR_I_Z9576_20190810000600_O_DOR_SA_CAP.bin.bz2')
+    tilt_number = 0
+    data_radius = 230
+    data_dtype = 'REF' # stands for reflectivity
+    ra = f.get_data(tilt_number, data_radius, data_dtype)
+    
+    v = []
+    v.append(ra)
+    gmap =cinrad.easycalc.GridMapper(v)
+    grid = gmap(0.1)
+    lon = grid.lon
+    lat = grid.lat
+    data = grid.data
+    
+    h = []
+    height = ra.height
+    rb = ra
+    rb.data = height
+    h.append(rb)
+    gcma = cinrad.easycalc.GridMapper(h)
+    gcmd = gcma(0.1)
+    lon2 = gcmd.lon
+    lat2 = gcmd.lat
+    hig = gcmd.data
+    ax = fig.add_subplot(111, projection='3d')
+    color_map =data.reshape(43*49)
+    print(color_map.shape)
+    # ax.scatter(lon2, lat2,hig,c=color_map,cmap=cmaps, s=5)
+    import matplotlib as mpl
+    from mpl_toolkits.basemap import Basemap
+    import matplotlib.cm as cm
+    norm = mpl.colors.Normalize(vmin=0, vmax=70)
+    m = cm.ScalarMappable(norm=norm, cmap=cmaps)
+    map = Basemap(llcrnrlat=25,urcrnrlat=31,llcrnrlon=118,urcrnrlon=125)
+    #ax.plot_surface(lon2, lat2,hig,facecolors=data,rstride=1, cstride=1, cmap=cmaps,shade=True)
+    ax.plot_surface(lon2, lat2,hig,facecolors=m.to_rgba(data),rstride=1, cstride=1)
+    #ax.plot_surface(lon2, lat2,hig,facecolors=cmaps(data/40),rstride=1, cstride=1)
+    # print('max',max(data))
+    # print('min',min(data))
+    print(lon2.shape)
+    print(lat2.shape)
+    print(hig.shape)
+    print(data.shape)
+    print(lon)
+    print(lat)
+    # ax.scatter(lon2, lat2,hig,cmap='jet', s=40,
+    #              label='Points')
+    # ax.contourf(lon,lat,data,zdir='z',offset=-2)
+    ax.contourf(lon,lat,data,cmap=cmaps,zdir='z',offset=-10)
+    ax.add_collection3d(map.drawcoastlines())
+    
+    
     FigureCanvasAgg(fig)
     buf = BytesIO()
     plt.savefig(buf, format='png')

@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^plot$',views.plot),
     url(r'^plotmap$',views.plotmap), 
     url(r'^plotmap2$',views.plotmap2),   
+    url(r'^plotmap3$',views.plotmap3),
 ]
