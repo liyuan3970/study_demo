@@ -19,7 +19,7 @@ from . import views
 urlpatterns = [
     # 首页的配置方法
     url(r'^$',views.index),
-    url(r'^plot$',views.plot),
-    url(r'^plotmap$',views.plotmap), 
-    url(r'^plotmap2$',views.plotmap2),   
+    url(r'^plot$',views.plot)
+
+    
 ]
