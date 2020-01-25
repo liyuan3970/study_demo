@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="jquery-1.11.3.js"></script>
+  <style>
+	#d1{
+		color:red;
+	}
+	.c1{
+		background:green;
+	}
+	.c2{
+		font-style:italic;
+	}
+  
+  </style>
+ </head>
+ <body>
+	<h1>一级标题</h1>
+	<h2>二级标题</h2>
+	<h3>标题</h3>
+	<button onclick="toggle()">切换</button>
+	<div></div>
+	<script>
+		//1. 添加id/class属性对应选择器样式
+		//整体操作class属性
+		$("h1").attr("id","d1").attr("class","c1 c2");
+		$("div").text("我为div元素添加内容")
+
+		//2. 操作类名设置样式
+		$("h2").addClass("c1").addClass("c2");//添加类名
+		$("h2").removeClass();
+		function toggle(){
+			$("h3").toggleClass("c2");
+		}
+
+		//3.操作行内样式
+		$("h3").css("width","200px").css("height","200px").css("background","orange");
+		$("h2").css({
+			"width":"200px",
+			"height":"200px",
+			"background":"green",
+			"border-radius":"50%",
+			"text-align":"center",
+			"line-height":"200px"
+		});
+		/*宽高,背景色,圆角效果,文本居中*/
+
+
+	
+	</script>
+ </body>
+</html>

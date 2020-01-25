@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="jquery-1.11.3.js"></script>
+
+ </head>
+ <body>
+	<button>点击</button>
+	<h1>一级标题</h1>
+	<h1>一级标题</h1>
+	<h1>一级标题</h1>
+	
+	<input type="checkbox">
+	  <script>
+  /*
+	window.onload = function(){
+		alert("弹框一");
+	};
+	window.onload = function(){
+		alert("弹框二");
+	};
+	*/
+
+	//$(document).ready(function (){
+	//	alert("弹框一");
+	//});
+	$().ready(function (){
+		alert("弹框二");
+	});
+
+	$(function (){
+		//alert("弹框三");
+		$("button").on("click",function(evt){
+			alert("按钮被点击");
+			console.log(evt,evt.offsetX);
+		});
+		$("h1").bind("mouseover",function(){
+			console.log("鼠标移入");
+		});
+		$("input").change(function (){
+			//输出按钮的选中状态
+			/*
+			1. this指代事件的触发对象
+			2. jquery中可以使用this关键字,注意this是原生对象,不能直接调用jquery方法
+			*/
+			console.log(this.checked,$(this).prop("checked"));
+		});
+
+		var arr = [10,20,30];
+		//jquery对象调用jquery方法
+		$(arr).each(function (index,elem){
+			//遍历数组,自动传入下标及元素
+			console.log(index,elem);
+		});
+		$("h1").each(function (){
+			console.log(this);
+			console.log($(this).html());
+		
+		});
+
+
+
+
+	})
+
+  </script>
+ </body>
+</html>

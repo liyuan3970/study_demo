@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="jquery-1.11.3.js"></script>
+ </head>
+ <body>
+  <p>小米新机发布</p>
+  <p>华为新机</p>
+  <p class="c1">华为保时捷</p>
+  <p>苹果</p>
+  <p>华为mate20</p>
+  <p>三星</p>
+  <button onclick="first()">:first</button>
+  <button onclick="last()">:last</button>
+  <button onclick="odd()">:odd(奇数下标)></button>
+  <button onclick="even()">:even(偶数下标)</button>
+  <button onclick="eq()">:eq(index)</button>
+  <button onclick="lt()">:lt(index)</button>
+  <button onclick="gt()">:gt(index)</button>
+  
+  <script>
+    function first(){
+      $("p:first").css("color","red");
+    }
+    function last(){
+      $("p:last").css("color","green");
+    }
+    function odd(){
+      $("p:odd").css("background","orange");
+    }
+    function even(){
+      $("p:even").css("background","pink");
+    }
+
+    function eq(){
+      $("p:eq(0)").html('66666');
+    }
+    function lt(){
+      $("p:lt(2)").css("border","1px solid black");
+    }
+    function gt(){
+      $("p:gt(2)").css("font-weight","bold");
+    }
+
+    //$(":not(p)").css("border","1px solid blue");
+    $("p:not(.c1)").css("color","gray")
+
+  
+  </script>
+
+
+
+ </body>
+</html>

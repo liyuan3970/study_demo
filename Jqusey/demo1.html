@@ -10,11 +10,19 @@
   <script src="jquery-1.11.3.js"></script>
  </head>
  <body>
-	<p>段落文本</p>
+	<h1>一级标题</h1>
+  <input type="text" value="zhangsan">
 	<script>
-		var h1 = $("<h1></h1>");
-		h1.html("动态创建").attr("id","d1").css("color","red");
-        $("body").prepend(h1);
+		//var h1 = document.getElementsByTagName("h1")[0];
+    var h1 = $('h1')
+    h1.text("666")
+    h1.html('6667')
+    h1.html('<h1>一级标题</h1>')
+    h1.text('<h1>一级标题</h1>')
+
+    console.log($("h1").html());
+    console.log($("h1").text());
+
 
 
 	</script>

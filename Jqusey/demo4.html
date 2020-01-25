@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>万能属性选择器</title>
+  <script src="jquery-1.11.3.js"></script>
+ </head>
+ <body>
+	<h1 id="text1">一级标题</h1>
+	<h1 id="t1">一级标题</h1>
+	<h1 id="e1">一级标题</h1>
+	<h1 class="type1">一级标题</h1>
+	<h1>标题</h1>
+	<script>
+		$("[id]").css("color","red");
+		$("[id='t1']").css("background","orange")
+		$('#t1').html('我是id选择器')
+		$("[class='type1']").html('我是class选择器')
+		$("[id]:eq(2)").html("列表选择")
+		console.log($("[id^=t]"));
+		console.log($("[id$=1]"));
+		console.log($("[id*=e]"));
+	</script>
+ </body>
+</html>

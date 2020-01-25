@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="jquery-1.11.3.js"></script>
+ </head>
+ <body>
+	<p>段落文本</p>
+	<script>
+		var h1 = $("<h1></h1>");
+		h1.html("动态创建").attr("id","d1").css("color","red");
+		//添加至body的开头
+		$("body").prepend(h1);
+
+		var h2 = $("<h2 id='d2'>二级标题</h2>");
+		//添加至body的末尾
+		$("body").append(h2);
+
+		//在p元素的前后分别添加超链接
+		var a1 = $("<a href=''>超链接1</a>");
+		var a2 = $("<a href=''>超链接2</a>");
+		$("p").before(a1);
+		$("p").after(a2);
+
+		//移除
+		$("p").remove();
+
+	</script>
+ </body>
+</html>

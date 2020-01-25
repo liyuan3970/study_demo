@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>事件的绑定</title>
+  <script src="jquery-1.11.3.js"></script>
+ </head>
+ <body>
+	<input type="text" name="" onclick="test()">
+	<button onclick="show()">显示</button>
+	<div></div>
+	<script>
+		function show(){
+			$("div").html("<h1>"+$("input").val()+"</h1>");
+		}
+		function test(){
+			$("div").html("6666");
+		}
+	
+	</script>
+ </body>
+</html>
