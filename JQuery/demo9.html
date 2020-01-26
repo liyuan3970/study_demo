@@ -1,0 +1,45 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title> 页面名称 </title>
+</head>
+<body>
+<canvas id="canvasId" width="400" height="400" style="background-color: #eee;"></canvas>
+<script type="text/javascript">
+var canvas = document.getElementById("canvasId");
+var ctx = canvas.getContext("2d");
+var flag = false;
+var tc = document.createElement("canvas");
+tc.width = canvas.width;
+tc.height = canvas.height;
+var tctx = tc.getContext("2d");
+var x = 0;
+var y = 0;
+canvas.onmousedown = function (e) {
+	e = e || window.event;
+	x = e.clientX - canvas.offsetLeft + (document.body.scrollLeft || document.documentElement.scrollLeft);
+	y = e.clientY - canvas.offsetTop  + (document.body.scrollTop || document.documentElement.scrollTop);
+	flag = true;
+	tctx.drawImage(canvas,0,0,canvas.width,canvas.height);
+}
+canvas.onmousemove = function (e) {
+	if (!flag) return;
+	e = e || window.event;
+	var gx = e.clientX - canvas.offsetLeft + (document.body.scrollLeft || document.documentElement.scrollLeft);
+	var gy = e.clientY - canvas.offsetTop  + (document.body.scrollTop || document.documentElement.scrollTop);
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+	ctx.drawImage(tc,0,0,canvas.width,canvas.height);
+	ctx.beginPath();
+	ctx.moveTo(x,y);
+	ctx.lineTo(gx,gy);
+	ctx.stroke();
+}
+canvas.onmouseup = function (e) {
+	flag = false;
+}
+</script>
+</body>
+</html>
