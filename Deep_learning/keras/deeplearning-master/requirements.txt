@@ -1,0 +1,13 @@
+numpy
+scipy
+pandas
+matplotlib
+TensorFlow
+keras
+scikit-learn
+h5py
+Pillow
+pydot
+nltk
+gensim
+pyecharts
