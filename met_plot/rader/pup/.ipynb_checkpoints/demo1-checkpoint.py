@@ -2,7 +2,7 @@ import cinrad
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.use('TkAgg')
+#matplotlib.use('TkAgg')
 f = cinrad.io.CinradReader('Z_RADR_I_Z9576_20190810000600_O_DOR_SA_CAP.bin.bz2')
 tilt_number = 0
 data_radius = 230
