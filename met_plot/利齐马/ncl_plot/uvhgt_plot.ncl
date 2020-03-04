@@ -3,17 +3,19 @@ begin
 ;            data　input
 ;>---------------------------------------<
 
-filetime = "gdas1.fnl0p25.2019081000.f00"
+;filetime = "gdas1.fnl0p25.2019081000.f00"
 
-time = "2019080312"
-
+;time = "2019080806"
+;time = "2019080912"
+;time = "2019081000"
+time = "2019081006"
 
 
 ;; time3 图片没有
 
 
 wks = gsn_open_wks("png",time)
-f = addfile("/home/liyuan3970/Data/data/meto_data/fnl/fnl_025/"+filetime + ".grib2", "r")
+f = addfile("/home/liyuan3970/Data/data/meto_data/fnl/fnl_025/gdas1.fnl0p25."+time + ".f00.grib2", "r")
 
 hgt = f->HGT_P0_L100_GLL0({50000}, :, :)
 hgt = hgt * 0.1
@@ -109,7 +111,7 @@ vcres@vcRefAnnoOn               = False
 vcres@vcWindBarbLineThicknessF  = 0.5
 vcres@vcWindBarbColor = "red"
 vcres@vcMinMagnitudeF = 2
-vcres@vcWindBarbTickLengthF = 0.45
+vcres@vcWindBarbTickLengthF = 0.65
 vcres@vcMinDistanceF            =0.035
 ;>---------------------------------------<
 
@@ -190,8 +192,8 @@ rts@gsnCenterString = time
 
 mapplot = gsn_csm_map(wks, mpres)
 cnplot = gsn_csm_contour(wks, hgt, cnres)
-vcplot = gsn_csm_vector(wks, u, v, vcres)
-vqplot = gsn_csm_vector(wks, qu1, qv1, vqres)
+vcplot = gsn_csm_vector(wks, u1, v1, vcres)
+;vqplot = gsn_csm_vector(wks, qu1, qv1, vqres)
 
 ;vdqplot = gsn_csm_contour(wks,qduv, rts)
 vdqplot = gsn_csm_contour(wks,qabs, rts)
@@ -199,7 +201,7 @@ vdqplot = gsn_csm_contour(wks,qabs, rts)
 overlay(mapplot, vdqplot)
 overlay(mapplot, cnplot)
 overlay(mapplot, vcplot)
-overlay(mapplot, vqplot)
+;overlay(mapplot, vqplot)
 ;overlay(mapplot, vdqplot)
 draw(mapplot)
 frame(wks)
