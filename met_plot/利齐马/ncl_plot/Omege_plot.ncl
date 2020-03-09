@@ -60,20 +60,21 @@ temp(8:30,:,:)=t(11:33,:,:)
 
 ept=pot_temp_equiv(p2, temp, rh, 1, "rh") 
 printVarSummary(ept)
-;duv=uv2dv_cfd(u,v,u&lat_0,u&lon_0,2)
-duv = uv2dvF_Wrap(u,v)
+duv=uv2dv_cfd(u,v,u&lat_0,u&lon_0,2)
+;duv = uv2dvF_Wrap(u,v)
 copy_VarCoords(u, duv)
 printVarSummary(duv)
 ;>---------------------------------------<
 ;             DATA OUTPUT
 ;>---------------------------------------<
 
-ept1 = ept({lv_ISBL0|10000:100000},{lat_0|lat0},{lon_0|100:160})
+ept1 = ept({lv_ISBL0|10000:100000},{lat_0|lat0},{lon_0|118:126})
 u1 = u({lv_ISBL5|:},{lat_0|lat0},{lon_0|118:126})  ;lat0.25 * lon0.25   ---->25N127.5E
 v1 = v({lv_ISBL5|:},{lat_0|lat0},{lon_0|118:126})
 w1 = w({lv_ISBL9|:},{lat_0|lat0},{lon_0|118:126})
 
 duv1 = duv({lv_ISBL5|:},{lat_0|lat0},{lon_0|118:126})
+duv1 = duv1*10000
 
 w1 = w1 *-100
 
@@ -82,6 +83,7 @@ u2 = u({lv_ISBL5|:},{lat_0|0:45},{lon_0|lon0})  ;lat0.25 * lon0.25   ---->25N127
 v2 = v({lv_ISBL5|:},{lat_0|0:45},{lon_0|lon0})
 w2 = w({lv_ISBL9|:},{lat_0|0:45},{lon_0|lon0})
 duv2 = duv({lv_ISBL5|:},{lat_0|0:45},{lon_0|lon0})
+duv2 = duv2*10000
 printVarSummary(ept2)
 printVarSummary(u2)
 printVarSummary(duv2)
@@ -104,14 +106,14 @@ vcres=True
   vcres@vcRefAnnoFontHeightF  =0.02
   vcres@vcRefAnnoFontThicknessF =0.02
   vcres@vcRefAnnoJust    =      "TopRight"
-
+  vcres@vcMapDirection   = False
   vcres@vcRefAnnoString2   =" "           ;去掉reference vector字样
   ;vcres@vcRefMagnitudeF           = 2            ; define vector ref mag
   vcres@vcRefLengthF              = 0.2          ; define length of vec ref
   vcres@vcRefAnnoOrthogonalPosF   =-1.36 ;;;-1.36            ; move ref vector
   vcres@vcMinDistanceF            =0.02
   vcres@vcLineArrowThicknessF =1.3
-
+  vcres@gsnPresHgtHeightLabelOn = False
   vcres@vcVectorDrawOrder       = "PostDraw"        ; draw vectors last
 
 
@@ -127,10 +129,10 @@ vcres@cnLinesOn = False
 ;vcres@lbLabelBarOn = True;False
   
 vcres@cnLevelSelectionMode="ManualLevels"
-;vcres@cnMinLevelValF=-25
-;vcres@cnMaxLevelValF=25
-;vcres@cnLevelSpacingF=5
-;vcres@cnFillColors = (/34,54,74,84,98,114,132,148,162,178,215,225/)
+vcres@cnMinLevelValF=-10
+vcres@cnMaxLevelValF=6
+vcres@cnLevelSpacingF=2
+vcres@cnFillColors = (/34,54,74,84,98,114,0,148,162,178,215,225/)
 vcres@lbLabelBarOn = False
 vcres@tiYAxisString   = " "
 vcres@gsnLeftString   = "Vertical Wind";
@@ -147,8 +149,8 @@ vcres2 = vcres
 vcres2@gsnLeftString   = "Vertical-Latitude Wind";
 
 cnres = True
-cnres@gsnDraw = False
-cnres@gsnFrame = False
+;cnres@gsnDraw = False
+;cnres@gsnFrame = False
 cnres@cnSmoothingOn = True ;
 cnres@cnSmoothingDistanceF   = 0.001
 cnres@cnLevelSelectionMode   = "ManualLevels"
@@ -156,19 +158,26 @@ cnres@cnMinLevelValF = 300
 cnres@cnMaxLevelValF = 400
 cnres@cnLevelSpacingF = 10
 cnres@cnInfoLabelOn = False
+cnres@trYReverse = True  ;坐标轴反转
 cnres@cnLineLabelsOn          =  True
 cnres@cnLineLabelFontHeightF = 0.01
-cnres@cnLineThicknessF = 5.0
+cnres@cnLineThicknessF = 2.0
 cnres@cnLineLabelInterval = 1
 
-cnplot1 = gsn_csm_contour(wks, ept1, cnres)
-cnplot2 = gsn_csm_contour(wks, ept2, cnres) 
+cnplots = new(2,graphic)
+cnplots(0) = gsn_csm_pres_hgt(wks, ept1, False)
+cnplots(1) = gsn_csm_pres_hgt(wks, ept2, False) 
+;gsn_csm_pres_hgt
+;cnplots(0) = gsn_csm_contour(wks, ept1, cnres)
+;cnplots(1) = gsn_csm_contour(wks, ept2, cnres) 
 
 plots(0) = gsn_csm_pres_hgt_vector(wks,duv1,u1,w1,vcres1)  
 plots(1) = gsn_csm_pres_hgt_vector(wks,duv2,v2,w2,vcres2) 
 
-overlay(plots(0),cnplot1)
-overlay(plots(1),cnplot2)
+overlay(plots(0),cnplots(0))
+overlay(plots(1),cnplots(1))
+;overlay(cnplots(0),plots(0))
+;overlay(cnplots(1),plots(1))
  pres1                     = True
   pres1@gsnPanelTop       =1
   pres1@gsnPanelBottom    =0.4
@@ -180,6 +189,7 @@ overlay(plots(1),cnplot2)
   ;pres1@lbOrientation       ="Vertical"
   pres1@amJust  = "TopLeft"
 gsn_panel(wks,plots,(/1,2/),pres1)
+;gsn_panel(wks,cnplots,(/1,2/),pres1)
 ;draw(plots)
 frame(wks)
 
