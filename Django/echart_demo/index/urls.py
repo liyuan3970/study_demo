@@ -20,4 +20,7 @@ urlpatterns = [
     # 首页的配置方法
     url(r'^$',views.index),
     url(r'json_respone',views.geojson),
+    url(r'index3',views.index3),
+
+    url(r'json_reback',views.rjson),
 ]

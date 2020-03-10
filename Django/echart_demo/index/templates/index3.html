@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="/static/js/jquery-1.11.3.js"></script>
+  <script>
+    $(function(){
+      $("#btn").click(function(){
+        //var data = "uname=lvze&upwd=maria";
+        var data2 = {
+          "uname":'lvze',
+          "upwd": 'maria',
+        }
+        $.get('/json_reback',data2,function(data){
+          $("#show").html(data.name);
+        });
+      });
+    });
+  </script>
+   <script>
+    $(function(){
+
+        var data1 = {
+          "uname":'lvze',
+          "upwd": 'maria',
+        }
+        $.get('/json_reback',data1,function(data){
+          console.log(data.name);
+          console.log(data.age);
+        });
+      });
+  </script>
+
+
+    <script>
+    $(function(){
+      $("#btn2").click(function(){
+        $.ajax({
+          url:'/json_reback',
+          type:'get',
+          dataType:'json',
+          success:function(data){
+            /**普通json数据*/
+            /*
+            for(var i = 0;i<data.length;i++){
+              var obj = data[i];
+              console.log("书名:"+obj.title+",价格:"+obj.price);
+            }*/
+           console.log(data.name);
+           console.log("ajax-get");
+
+          }
+        });
+      });
+    });
+  </script>
+
+       <script>
+    $(function(){
+
+        var data1 = {
+          "uname":'lvze',
+          "upwd": 'maria',
+        }
+        $.ajax({
+          url:'/json_reback',
+          type:'get',
+          dataType:'json',
+          success:function(data){
+            /**普通json数据*/
+            /*
+            for(var i = 0;i<data.length;i++){
+              var obj = data[i];
+              console.log("书名:"+obj.title+",价格:"+obj.price);
+            }*/
+           console.log(data.age);
+           console.log("ajax-get-update");
+
+          }
+        });
+      });
+  </script>
+</head>
+<body>
+  <button id="btn">发送ajax请求</button>
+  <button id="btn2">发送ajax2请求</button>
+  <div id="show"></div>
+</body>
+</html>
