@@ -19,5 +19,5 @@ from . import views
 urlpatterns = [
     # 首页的配置方法
     url(r'^$',views.index),
-    url(r'/static/Echarts/xicheng.json',views.geojson),
+    url(r'json_respone',views.geojson),
 ]

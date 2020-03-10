@@ -8,4 +8,4 @@ def index(request):
 
 def geojson(request):
     ## print(this is a index)
-    return render(request,'index.html',locals())
+    return render(request,'index2.html',locals())
