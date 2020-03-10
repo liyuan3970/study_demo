@@ -4,8 +4,8 @@ begin
 ;>---------------------------------------<
 ;filetime = "gdas1.fnl0p25.2019081000.f00"
 
-;time = "2019080806"
-time = "2019080912"
+time = "2019080806"
+;time = "2019080912"
 ;time = "2019081000"
 ;time = "2019081006"
 
@@ -15,20 +15,11 @@ time = "2019080912"
 
 
 
-;lat0 = 23.50
-;lon0 = 125.00
+lat0 = 23.50
+lon0 = 125.50
 
-lat0 = 27.75
-lon0 = 122.25
-
-;lat0 = 29.00
-;lon0 = 120.50
-
-;lat0 = 29.75
-;lon0 = 119.75
-
-;lat0 = 30.00
-;lon0 = 119.00
+;lat0 = 27.75
+;lon0 = 122.25
 
 wks = gsn_open_wks("png",time+"_omega")
 f = addfile("/home/liyuan3970/Data/data/meto_data/fnl/fnl_025/gdas1.fnl0p25."+time + ".f00.grib2", "r")
@@ -84,21 +75,21 @@ printVarSummary(duv)
 ;             DATA OUTPUT
 ;>---------------------------------------<
 
-ept1 = ept({lv_ISBL0|10000:100000},{lat_0|lat0},{lon_0|118:126})
-u1 = u({lv_ISBL5|:},{lat_0|lat0},{lon_0|118:126})  ;lat0.25 * lon0.25   ---->25N127.5E
-v1 = v({lv_ISBL5|:},{lat_0|lat0},{lon_0|118:126})
-w1 = w({lv_ISBL9|:},{lat_0|lat0},{lon_0|118:126})
+ept1 = ept({lv_ISBL0|10000:100000},{lat_0|lat0},{lon_0|120:130})
+u1 = u({lv_ISBL5|:},{lat_0|lat0},{lon_0|120:130})  ;lat0.25 * lon0.25   ---->25N127.5E
+v1 = v({lv_ISBL5|:},{lat_0|lat0},{lon_0|120:130})
+w1 = w({lv_ISBL9|:},{lat_0|lat0},{lon_0|120:130})
 
-duv1 = duv({lv_ISBL5|:},{lat_0|lat0},{lon_0|118:126})
+duv1 = duv({lv_ISBL5|:},{lat_0|lat0},{lon_0|120:130})
 duv1 = duv1*10000
 
 w1 = w1 *-100
 
-ept2 = ept({lv_ISBL0|10000:100000},{lat_0|20:35},{lon_0|lon0})
-u2 = u({lv_ISBL5|:},{lat_0|20:35},{lon_0|lon0})  ;lat0.25 * lon0.25   ---->25N127.5E
-v2 = v({lv_ISBL5|:},{lat_0|20:35},{lon_0|lon0})
-w2 = w({lv_ISBL9|:},{lat_0|20:35},{lon_0|lon0})
-duv2 = duv({lv_ISBL5|:},{lat_0|20:35},{lon_0|lon0})
+ept2 = ept({lv_ISBL0|10000:100000},{lat_0|18:30},{lon_0|lon0})
+u2 = u({lv_ISBL5|:},{lat_0|18:30},{lon_0|lon0})  ;lat0.25 * lon0.25   ---->25N127.5E
+v2 = v({lv_ISBL5|:},{lat_0|18:30},{lon_0|lon0})
+w2 = w({lv_ISBL9|:},{lat_0|18:30},{lon_0|lon0})
+duv2 = duv({lv_ISBL5|:},{lat_0|18:30},{lon_0|lon0})
 duv2 = duv2*10000
 printVarSummary(ept2)
 printVarSummary(u2)
@@ -166,12 +157,12 @@ plots = new(2,graphic)
 
 vcres1 = vcres
 vcres1@gsnLeftString   = "";
-vcres1@tmXBValues=(/118,119,120,121,122,123,124,125,126/)
-vcres1@tmXBLabels=(/"118E","119E","120E","121E","122E","123E","124E","125E","126E"/)
+vcres1@tmXBValues=(/120,121,122,123,124,125,126,127,128,129,130/)
+vcres1@tmXBLabels=(/"120E","121E","122E","123E","124E","125E","126E","127E","128E","129E","130E"/)
 vcres2 = vcres
 vcres2@gsnLeftString   = "";
-vcres2@tmXBValues=(/20,22,24,26,28,30,32,34/)
-vcres2@tmXBLabels=(/"20N","22N","24N","26N","28N","30N","32N","34N"/)
+vcres2@tmXBValues=(/18,20,22,24,26,28,30/)
+vcres2@tmXBLabels=(/"18N","20N","22N","24N","26N","28N","30N"/)
 
 cnres = True
 cnres@gsnDraw = False

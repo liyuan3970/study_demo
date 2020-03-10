@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bfd1720f-f4d6-41fb-a5c1-ba949d4bb578" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../blogdemo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../blogdemo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../markdown/.ipynb_checkpoints/markdown-checkpoint.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../markdown/.ipynb_checkpoints/markdown-checkpoint.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../markdown/markdown.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../markdown/markdown.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../met_plot/利齐马/ncl_plot/Omege_plot.ncl" beforeDir="false" afterPath="$PROJECT_DIR$/../../met_plot/利齐马/ncl_plot/Omege_plot.ncl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../met_plot/利齐马/ncl_plot/test_omega.png" beforeDir="false" />
-    </list>
+    <list default="true" id="bfd1720f-f4d6-41fb-a5c1-ba949d4bb578" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,11 +22,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="40">
+              <caret line="369" column="16" selection-start-line="369" selection-start-column="16" selection-end-line="369" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -57,10 +49,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="315">
               <caret line="21" column="53" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="53" />
               <folding>
                 <element signature="e#642#674#0" expanded="true" />
@@ -98,6 +90,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -119,7 +112,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -183,17 +175,18 @@
       <workItem from="1583670533729" duration="935000" />
       <workItem from="1583671471066" duration="1274000" />
       <workItem from="1583747425596" duration="205000" />
+      <workItem from="1583750362183" duration="945000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2414000" />
+    <option name="totallyTimeSpent" value="3359000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1920" height="1022" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2561629" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25937834" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -207,7 +200,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3340935" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.336374" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -250,20 +243,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index/urls.py">
+    <entry file="file://$PROJECT_DIR$/static/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="21" column="53" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="53" />
-          <folding>
-            <element signature="e#642#674#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="30" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="30" />
+        <state relative-caret-position="40">
+          <caret line="369" column="16" selection-start-line="369" selection-start-column="16" selection-end-line="369" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -274,10 +257,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/index.js">
+    <entry file="file://$PROJECT_DIR$/index/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
+        <state relative-caret-position="150">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/jquery-1.9.1.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="53" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="53" />
+          <folding>
+            <element signature="e#642#674#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
