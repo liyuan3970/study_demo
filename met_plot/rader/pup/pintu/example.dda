@@ -1,0 +1,49 @@
+# Run time parameters for DDA.
+# White space can be any sequence of spaces, tabs, and newlines.
+# token: specifies type of parameter. Subsequent content depends on token.
+# Parameters can be provided in any order.
+# '#' to end of line is ignored.
+
+# (Optional) Execution directory. Analysis process will set working directory
+# to this when it starts. Auxiliary files hard coded into this program must be
+# in this directory, or defaults will be used. Output files will appear here,
+# too. Defaults to ".".
+dir:  /home/liyuan3970/Data/git_demo/MultiDop-master/pintu/
+
+# Grid specification.
+# axis: min step num_points
+# max will be min + (num_points - 1) * step
+# Assume, perhaps naively, that distances are measured in meters,
+# angles in degrees.
+x:  -100000.0  1000.0  151  
+y:  0.0  1000.0  151  
+z:  1000.0  1000.0  20  
+
+# Geographic coordinates of grid origin, degrees
+# Note that order is LONGITUDE LATITUDE, not vice versa (think Cartesian).
+grid:  120.74  27.9  0.0  
+
+# OPAWS or OBAN input. Number of radars followed by that many file paths and
+# radar name. Radar name identifies a radar elsewhere in parameter input.
+opaws:  2
+khtx_supercell.nc KHTX
+armor_supercell.nc ARMOR
+
+# (Optional) Name of reflectivity variable. Defaults to "DT".
+refl:  DT
+
+# (Optional) Name of velocity variable. Defaults to "VT".
+vt:  VT
+
+# (Optional) Name of background file. If absent, analysis will not use sounding
+# constraint.
+
+# Names of output file
+frprmn_out:  frprmn_out.nc
+writeout:  /tmp/tmpmzbvdydn
+
+# Minimum beam crossing angle for optimal coverage
+min_cba:  20.0
+
+# Additional parameters for calculation
+calc_params:  calc_example.dda

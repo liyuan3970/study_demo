@@ -1,0 +1,139 @@
+# For mass conservation constraint (CalcDiv):
+# 0 => Boussinesq approximation
+# 1 => anelastic approximation
+anel:  1
+
+# For smoothness constraint (CalcSmooth):
+# 0 => first-order derivatives
+# 1 => second-order derivatives
+laplace:  0
+
+# For weights in data constraint:
+# 0 => calculate and output to file
+# 1 => read from file
+# 2 => weight all observations equally
+read_dataweights:  2
+
+# For dual-Doppler coverage_bg mask
+# Verification statistics computed within 2+ Doppler domain only.
+# 0 => calculate
+# 1 => read from file
+# 2 => don't calculate
+read_cvg:  0
+
+# Dual-Doppler domain criteria:
+# There must be at least one observation from each radar within this distance
+# of the analysis point (only used if read_cvg=0)
+max_dist:  10.0
+
+# Optional height below which to omit observations from analysis
+# (e.g., data-denial experiments).
+cutoff:  0.0
+
+# Prescribed storm motion (spatiotemporally constant)
+UT:  0.0
+VT:  0.0
+
+# If = 1, output verification stats after each iteration
+# (see bottom of CalcCost)
+output_error:  0
+
+# The index of the height equal to and below that
+# the sounding constraint is weakened inside regions
+# with greater than 10 dbz. Set to -1 to prevent
+# implementation
+weak_height:  -1
+
+# Impose upper BC w=0 if 1, ignore if -1
+upper_bc:  1
+
+# Number of iterations in frprmn before and after the filtering round
+itmax_frprmn:  200  10  
+
+# Number of iterations in dbrent
+itmax_dbrent:  200
+
+# Coefficient for data constraint
+C1b:  1.0
+
+# Coefficient for mass conservation equation
+C2b:  10.0
+
+# Coefficient for vorticity equation
+C3b:  0
+
+# Coefficient for horizontal smoothing
+C4b:  1.0
+
+# Coefficient for vertical smoothing
+C5b:  0.0
+
+# Coefficient for sounding constraint
+C8b:  0.0
+
+# 0 => all constant weights
+# 1 => vary weights
+vary_weights:  0
+
+# Define filter with ONE of the following forms.
+# filter: none
+# filter: filter_frequency Leise nstep
+# filter: filter_frequency low-pass alpha
+#
+# Filter will be applied every filter_frequency iterations.
+# Leise filter will perform nstep steps. See leise_filt.f
+# Low pass filter will use alpha as smoothing parameter.
+# Default is no filter.
+filter:  none      
+
+# Coverage values for various combinations of radars.
+# Each line should provide the type of coverage value, radar count,
+# radar names, and the value, in the following form:
+#
+#   cvg_(""|opt|sub)_(bg|fil): integer radar1 radar2 ... boolean
+#
+# Radars are identified by the OPAWS/OBAN file name with grid data for that
+# radar. This must be just the base name, not the full path.
+#
+# For example:
+#
+#   cvg_opt_bg: SR1 SR2 1
+#
+# says that if SR1 SR2
+# both have data within max_dist meters of the point under consideration,
+# and an optimal beam crossing angle, then the point will receive a coverage
+# value of 1, i.e. point has coverage.
+#
+# "opt" means optimal beam crossing angle.
+# "sub" means suboptimal beam crossing angle.
+# "bg" means background coverage.
+# "fil" means filter coverage.
+# cvg_bg, cvg_fil, and sseq_trip do not require a radar count. (Beam crossing
+# angle is meaningless with one radar, so there is no opt or sub)
+#
+# If this file is being used, coverage values must be provided for all
+# combinations of radars.
+
+# Background coverage arrays for optimal beam crossing angle for two radars
+cvg_opt_bg:  2  KHTX  ARMOR  1
+
+# Background coverage arrays for suboptimal beam crossing angle for two radars
+cvg_sub_bg:  2  KHTX  ARMOR  0
+
+# Filter coverage arrays for optimal beam crossing angle for two radars
+cvg_opt_fil:  2  KHTX  ARMOR  0
+
+# Filter coverage arrays for suboptimal beam crossing angle for two radars
+cvg_sub_fil:  2  KHTX  ARMOR  0
+
+# Background coverage arrays for single radar
+cvg_bg:  KHTX  0
+cvg_bg:  ARMOR  0
+
+# Filter coverage arrays for single radar
+cvg_fil:  KHTX  0
+cvg_fil:  ARMOR  0
+
+# Data weight multiplier when all 3 radar pairs have good beam crossing angles
+sseq_trip:  KHTX  1.0
+sseq_trip:  ARMOR  1.0
