@@ -1,4 +1,4 @@
-0import numpy as np
+import numpy as np
 from matplotlib import pyplot as plt
 from pandas import read_csv
 import math
@@ -27,6 +27,7 @@ def create_dataset(dataset):
 
 def build_model():
     model = Sequential()
+    model.add(LSTM(units=4, batch_input_shape=(batch_size, look_back, 1), stateful=True, return_sequences=True))
     model.add(LSTM(units=4, batch_input_shape=(batch_size, look_back, 1), stateful=True))
     model.add(Dense(units=1))
     model.compile(loss='mean_squared_error', optimizer='adam')

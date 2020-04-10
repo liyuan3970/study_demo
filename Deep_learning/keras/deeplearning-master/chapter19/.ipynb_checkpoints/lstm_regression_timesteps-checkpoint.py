@@ -1,4 +1,4 @@
-0import numpy as np
+import numpy as np
 from matplotlib import pyplot as plt
 from pandas import read_csv
 import math
@@ -13,7 +13,7 @@ batch_size = 1
 epochs = 100
 filename = 'international-airline-passengers.csv'
 footer = 3
-look_back=3
+look_back=1
 
 def create_dataset(dataset):
     dataX, dataY = [], []
@@ -27,7 +27,7 @@ def create_dataset(dataset):
 
 def build_model():
     model = Sequential()
-    model.add(LSTM(units=4, batch_input_shape=(batch_size, look_back, 1), stateful=True))
+    model.add(LSTM(units=4, input_shape=(look_back, 1)))
     model.add(Dense(units=1))
     model.compile(loss='mean_squared_error', optimizer='adam')
     return model
@@ -57,16 +57,11 @@ if __name__ == '__main__':
 
     # 训练模型
     model = build_model()
-    for i in range(epochs):
-        history = model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verbose=0, shuffle=False)
-        mean_loss = np.mean(history.history['loss'])
-        print('mean loss %.5f for loop %s' % (mean_loss, str(i)))
-        model.reset_states()
+    model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verbose=2)
 
     # 模型预测数据
-    predict_train = model.predict(X_train, batch_size=batch_size)
-    model.reset_states()
-    predict_validation = model.predict(X_validation, batch_size=batch_size)
+    predict_train = model.predict(X_train)
+    predict_validation = model.predict(X_validation)
 
     # 反标准化数据 --- 目的是保证MSE的准确性
     predict_train = scaler.inverse_transform(predict_train)
