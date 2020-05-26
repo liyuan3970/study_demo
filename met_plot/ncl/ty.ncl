@@ -2,7 +2,7 @@ begin
 ;>---------------------------------------<
 ;            data　input
 ;>---------------------------------------<
-filename = "gdas1.fnl0p25.2019081006.f00"
+filename = "/home/liyuan3970/Data/data/meto_data/fnl/fnl_025/gdas1.fnl0p25.2019080918.f00"
 f = addfile(filename + ".grib2", "r")
 hgt = f->HGT_P0_L100_GLL0({50000}, :, :)
 hgt = hgt * 0.1
@@ -42,7 +42,7 @@ copy_VarCoords(rh, qduv)
 ;>---------------------------------------<
 ;            set for the wks and golbal res
 ;>---------------------------------------<
-wks = gsn_open_wks("eps",filename)
+wks = gsn_open_wks("x11",filename)
 res = True
 res@gsnDraw = False
 res@gsnFrame = False
@@ -148,9 +148,9 @@ rts@cnLevelSelectionMode="ManualLevels"
 rts@cnMinLevelValF=2
 rts@cnMaxLevelValF=14
 rts@cnLevelSpacingF=2
-rts@cnFillColors = (/0,104,74,84,74,54,34,24,34/)
+rts@cnFillColors = (/0,104,74,84,74,54,34,4,2/)
 ;rts@cnMonoFillPattern = False
-rts@gsnCenterString = "2019-08-10-06:00"
+rts@gsnCenterString = "2019-08-10-02:00"
 
 
 ;;set for dot res

@@ -1,13 +1,13 @@
 begin
-filename = "gdas1.fnl0p25.2019080406.f00"
+filename = "/home/liyuan3970/Data/data/meto_data/fnl/fnl_025/gdas1.fnl0p25.2019080918.f00"
 f = addfile(filename + ".grib2", "r")
 hgt = f->HGT_P0_L100_GLL0({50000}, :, :)
 hgt = hgt * 0.1
-u = f->UGRD_P0_L100_GLL0({20000}, ::4, ::4)
+u = f->UGRD_P0_L100_GLL0({85000}, ::4, ::4)
 u = u * 2.5
-v = f->VGRD_P0_L100_GLL0({20000}, ::4, ::4)
+v = f->VGRD_P0_L100_GLL0({85000}, ::4, ::4)
 v =v * 2.5
-wks = gsn_open_wks("pdf", filename)
+wks = gsn_open_wks("x11", filename)
 res = True
 res@gsnDraw = False
 res@gsnFrame = False
@@ -18,10 +18,10 @@ res@gsnRightString = ""
 ;>---------------------------------------<
 mpres = res
 mpres@mpFillOn                = False
-mpres@mpMinLatF               = -30.
-mpres@mpMaxLatF               = 80.
-mpres@mpMinLonF               = 60.
-mpres@mpMaxLonF               = 270.
+mpres@mpMinLatF               = -10.
+mpres@mpMaxLatF               = 55.
+mpres@mpMinLonF               = 80.
+mpres@mpMaxLonF               = 160.
 mpres@mpDataBaseVersion       = "MediumRes"
 mpres@mpDataSetName           = "Earth..4"
 mpres@mpOutlineSpecifiers     = (/"China:states"/)
