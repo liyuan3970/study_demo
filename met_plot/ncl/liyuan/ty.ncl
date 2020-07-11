@@ -153,7 +153,7 @@ rts@cnMaxLevelValF=14
 rts@cnLevelSpacingF=2
 rts@cnFillColors = (/0,104,74,84,74,54,44,37,34/)
 ;rts@cnMonoFillPattern = False
-rts@gsnCenterString = "2019-08-10-02:00"
+rts@gsnCenterString = "2019-08-10-08:00"
 
 
 ;;set for dot res
