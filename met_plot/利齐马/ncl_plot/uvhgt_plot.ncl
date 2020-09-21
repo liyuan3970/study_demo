@@ -9,22 +9,15 @@ begin
 ;time = "2019080912"
 ;time = "2019081000"
 time = "2019081006"
-
-
 ;; time3 图片没有
-
-
 wks = gsn_open_wks("png",time)
 f = addfile("/home/liyuan3970/Data/data/meto_data/fnl/fnl_025/gdas1.fnl0p25."+time + ".f00.grib2", "r")
-
 hgt = f->HGT_P0_L100_GLL0({50000}, :, :)
 hgt = hgt * 0.1
 u = f->UGRD_P0_L100_GLL0({20000}, ::4, ::4)
 u = u * 2.5
 v = f->VGRD_P0_L100_GLL0({20000}, ::4, ::4)
 v =v * 2.5
-
-
 rh = f->RH_P0_L100_GLL0({85000}, :, :)
 t = f->TMP_P0_L100_GLL0({85000}, :, :)
 u1 = f->UGRD_P0_L100_GLL0({85000}, :, :) ;*2.5
@@ -179,17 +172,6 @@ rts@gsnCenterString = time
 ;rts@cnFillDotSizeF       = 0.005
 ;rts@cnFillColors = (/0,0,0,0,0,0,240,240,240,240,240/)
 ;rts@gsnLeftString = ""
-
-
-
-
-
-
-
-
-
-
-
 mapplot = gsn_csm_map(wks, mpres)
 cnplot = gsn_csm_contour(wks, hgt, cnres)
 vcplot = gsn_csm_vector(wks, u1, v1, vcres)
