@@ -87,5 +87,5 @@ option = {
     ]
 };
 
-var pie = echarts.init(document.getElementById('pie'))
+var pie = echarts.init(document.getElementById('pie'),'dark');
 pie.setOption(option);

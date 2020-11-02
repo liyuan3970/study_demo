@@ -69,5 +69,5 @@ option = {
         }
     ]
 };
-var comparebar = echarts.init(document.getElementById('comparebar'))
+var comparebar = echarts.init(document.getElementById('comparebar'),'dark')
 comparebar.setOption(option);

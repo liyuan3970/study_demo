@@ -110,5 +110,5 @@ option = {
     }]
 };
 
-var calendar = echarts.init(document.getElementById('calendar'))
+var calendar = echarts.init(document.getElementById('calendar'),'dark')
 calendar.setOption(option);

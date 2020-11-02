@@ -12,28 +12,83 @@
     <title>Document</title>
 </head>
 <body>
-<div class="row" style="border:1px solid red ;>
+<div class="row" style="border:1px solid red ">
     <div class="row clearfix">
-        <h3>这是一个demo</h3>
+        <h2>台州市月报预测系统</h2>
         <div class="col-md-12 column">
             <div class="row clearfix">
                 <div class="col-md-3 column">
                     <div class="row clearfix">
-                        <div class="col-md-12 column" id="comparebar" style="width:400px;height: 300px;margin: 0 auto">
-                            历史1
+                        <div class="col-md-12 column" id="comparebar" style="width:600px;height: 300px;" >
+                            各县过去月分的降水气温和雨日
                         </div>
-                        <script src='comparebar.js'></script>
+                        <script>
+                        	option = {
+    xAxis: [
+        {
+            type: 'category',
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '13月'],
+            axisPointer: {
+                type: 'shadow'
+            }
+        }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            name: '水量',
+            min: 0,
+            max: 250,
+            interval: 50,
+            axisLabel: {
+                formatter: '{value} ml'
+            }
+        },
+        {
+            type: 'value',
+            name: '温度',
+            min: 0,
+            max: 25,
+            interval: 5,
+            axisLabel: {
+                formatter: '{value} °C'
+            }
+        }
+    ],
+    series: [
+        {
+            name: '蒸发量',
+            type: 'bar',
+            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+        },
+        {
+            name: '降水量',
+            type: 'bar',
+            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+        },
+        {
+            name: '平均温度',
+            type: 'bar',
+            yAxisIndex: 1,
+            data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+        }
+    ]
+};
+var comparebar = echarts.init(document.getElementById('comparebar'),"dark")
+comparebar.setOption(option);
+
+                        </script>
 
                     </div>
                     <div class="row clearfix">
                         <div class="col-md-12 column" id="pie" style="width:400px;height: 300px;margin: 0 auto">
-                            历史2
+                            历史的日照的Bar图
                         </div>
                         <script src='pie.js'></script>
                     </div>
                     <div class="row clearfix">
                         <div class="col-md-12 column" id="weather" style="width:400px;height: 300px;margin: 0 auto">
-                            历史3
+                            历史数据的透视图标
                         </div>
                         <script src='weather.js'></script>
 
@@ -52,19 +107,19 @@
                         <div class="col-md-6 column">
                             <div class="row clearfix">
                                 <div class="col-md-12 column" id="bar" style="width:400px;height: 300px;margin: 0 auto">
-                                    图表1
+                                    实况月份的趋势图
                                 </div>
                                 <script src='bar.js'></script>
                             </div>
                             <div class="row clearfix">
-                                <div class="col-md-12 column" id="calendar" style="width:400px;height: 200px;margin: 0 auto">
+                                <div class="col-md-12 column" id="calendar" style="width:600px;height: 400px;margin: 0 auto">
 
-                                    图标2
+                                    历史数据的对照
                                 </div>
                                 <script src='calendar.js'></script>
-                                <div class="col-md-12 column" id="calendar" style="width:400px;height: 200px;margin: 0 auto">
+                                <div class="col-md-12 column" id="calendar" style="width:600px;height: 400px;margin: 0 auto">
 
-                                    图标2
+                                    天气情况的日历图
                                     <table class="table table-bordered table-hover table-condensed">
                                         <thead>
                                             <tr>
