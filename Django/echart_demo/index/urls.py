@@ -19,8 +19,11 @@ from . import views
 urlpatterns = [
     # 首页的配置方法
     url(r'^$',views.index),
+    url(r'index_demo',views.index_view),
     url(r'json_respone',views.geojson),
+    # echart的完整案例用法
     url(r'index3',views.index3),
+    url(r'bar_data',views.bar_data),
 
     url(r'json_reback',views.rjson),
 ]
