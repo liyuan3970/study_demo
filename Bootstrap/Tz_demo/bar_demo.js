@@ -33,7 +33,7 @@ option = {
             type: 'value',
             name: '水量',
             min: 0,
-            max: 200,
+            max: 300,
             interval: 50,
             axisLabel: {
                 formatter: '{value} ml'
@@ -75,5 +75,5 @@ option = {
         },
     ]
 };
-var comparebar = echarts.init(document.getElementById('comparebar'),'dark')
+var comparebar = echarts.init(document.getElementById('bar_demo'),'dark')
 comparebar.setOption(option,true);
