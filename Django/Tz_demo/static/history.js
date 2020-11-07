@@ -1,4 +1,8 @@
-option = {
+$(function(){
+    $.get('/history',function(data){
+        var history = echarts.init(document.getElementById('history'),'dark')
+        history.setOption({
+
     title: {
         text: '历史排位',
         subtext: ' '
@@ -31,21 +35,24 @@ option = {
     }],
     yAxis: {
         type: 'category',
-        data: ['第一', '第二', '第三', '第四', '第五', '第六']
+        data: data.day
     },
     series: [
         {
             name: '降水',
             type: 'bar',
             xAxisIndex: 1,
-            data: [55, 60, 170, 210, 350, 550]
+            data: data.pre
         },
         {
             name: '气温',
             type: 'bar',
-            data: [3, 13, 25, 30, 38, 44]
+            data: data.tem
         }
     ]
-};
-var his = echarts.init(document.getElementById('history'),'dark')
-his.setOption(option);
+
+
+
+    });
+  });
+});

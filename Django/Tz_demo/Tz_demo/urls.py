@@ -20,5 +20,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # 对应的是每一个项目的目录名称
     url(r'^',include('index.urls')),
-
 ]

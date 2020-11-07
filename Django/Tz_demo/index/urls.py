@@ -18,5 +18,9 @@ from . import views
 
 urlpatterns = [
     url(r'^$',views.index),
+    url(r'comparebar',views.comparebar),
+    url(r'history',views.history),
+    url(r'bar',views.bar),
+    url(r'radar',views.radar),
 
 ]

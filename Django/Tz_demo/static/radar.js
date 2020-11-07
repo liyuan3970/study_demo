@@ -1,4 +1,7 @@
-option = {
+$(function(){
+    $.get('/radar',function(data){
+        var radar = echarts.init(document.getElementById('radar'),'dark')
+        radar.setOption({
     title: {
         text: '气象要素常年对比'
     },
@@ -32,15 +35,21 @@ option = {
         // areaStyle: {normal: {}},
         data: [
             {
-                value: [4300, 10000, 28000, 35000, 35000,50000,19000],
+                value: data.month,
                 name: '本月要素值'
             },
             {
-                value: [5000, 14000, 28000, 31000, 31000,42000,21000],
+                value: data.history,
                 name: '常年要素值'
             }
         ]
     }]
-};
-var radar = echarts.init(document.getElementById('radar'),'dark')
-radar.setOption(option,true);
+
+
+
+
+
+
+    });
+  });
+});

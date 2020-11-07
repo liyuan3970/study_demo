@@ -1,4 +1,8 @@
-option = {
+$(function(){
+    $.get('/bar',function(data){
+        var bar = echarts.init(document.getElementById('bar'),'dark')
+        bar.setOption({
+
     tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -22,9 +26,7 @@ option = {
     xAxis: [
         {
             type: 'category',
-            data: ['1日','2日','3日','4日','5日','6日','7日','8日','9日','10日','11日','12日',
-            '13日','14日','15日','16日','17日','18日','19日','20日','21日','22日','23日','24日',
-            '25日','26日','27日','28日','29日','30日','31日'],
+            data: data.day,
             axisPointer: {
                 type: 'shadow'
             }
@@ -63,26 +65,23 @@ option = {
         {
             name: '级大风',
             type: 'bar',
-            data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3,
-            2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3,
-            2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6]
+            data: data.wind
         },
         {
             name: '降水量',
             type: 'bar',
-            data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3,
-            2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3,
-            2.6, 5.9, 9.0, 26.4, 28.7, 70.7]
+            data: data.pre
         },
         {
             name: '平均温度',
             type: 'line',
             yAxisIndex: 1,
-            data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2,
-            2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2,
-            2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3]
+            data: data.tem
         }
     ]
-};
-var comparebar = echarts.init(document.getElementById('bar'),'dark')
-comparebar.setOption(option,true);
+
+
+
+    });
+  });
+});
