@@ -1,21 +1,35 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 # Create your views here.
-
+from .comparebar import * 
+from django.views.decorators.cache import cache_page
 
 def index(request):
     ## print(this is a index)
     return render(request,'index.html',locals())
 
-
+@cache_page(60 * 15)
 def comparebar(request):
     # 第一张图 各县局的四要素统计
-    data={
-        'wind':[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0],
-        'pre':[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8],
-        'tem':[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5],
-        'sun':[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5],
+    stations =['58559','58652','58568','58660','K8201','K8301','58665','58664','58667','58665']
+    data ={
+    'wind':[],
+    'pre':[],
+    'tem':[],
+    'sun':[],
     }
+    for i in stations:
+        avg = read_sql_station(i)
+        data['wind'].append(avg[0])
+        data['pre'].append(avg[2])
+        data['tem'].append(avg[1])
+        data['sun'].append(avg[3])
+#    data={
+#        'wind':[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0],
+#        'pre':[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8],
+#        'tem':[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5],
+#        'sun':[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5],
+#    }
     return JsonResponse(data)
 
 def history(request):

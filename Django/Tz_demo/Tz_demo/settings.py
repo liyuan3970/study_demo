@@ -50,6 +50,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
+CACHES = {
+ 'default': {
+  'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',  # 指定缓存使用的引擎
+  'LOCATION': 'unique-snowflake',         # 写在内存中的变量的唯一值 
+  'TIMEOUT':300,             # 缓存超时时间(默认为300秒,None表示永不过期)
+  'OPTIONS':{
+   'MAX_ENTRIES': 300,           # 最大缓存记录的数量（默认300）
+   'CULL_FREQUENCY': 3,          # 缓存到达最大个数之后，剔除缓存个数的比例，即：1/CULL_FREQUENCY（默认3）
+  }  
+ }
+}
+
 ROOT_URLCONF = 'Tz_demo.urls'
 
 TEMPLATES = [
