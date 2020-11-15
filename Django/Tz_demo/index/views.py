@@ -3,6 +3,7 @@ from django.http import HttpResponse,JsonResponse
 # Create your views here.
 from .comparebar import * 
 from django.views.decorators.cache import cache_page
+import json
 
 def index(request):
     ## print(this is a index)
@@ -18,12 +19,17 @@ def comparebar(request):
     'tem':[],
     'sun':[],
     }
-    for i in stations:
-        avg = read_sql_station(i)
-        data['wind'].append(avg[0])
-        data['pre'].append(avg[2])
-        data['tem'].append(avg[1])
-        data['sun'].append(avg[3])
+    result = return_sql_station()#[wind,pre,tem,sun]
+    data['wind'] = result[0]
+    data['pre'] = result[1]
+    data['tem'] = result[2]
+    data['sun'] = result[3]
+    # for i in stations:
+    #     avg = read_sql_station(i)
+    #     data['wind'].append(avg[0])
+    #     data['pre'].append(avg[2])
+    #     data['tem'].append(avg[1])
+    #     data['sun'].append(avg[3])
 #    data={
 #        'wind':[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0],
 #        'pre':[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8],
