@@ -3,6 +3,7 @@ from django.http import HttpResponse,JsonResponse
 # Create your views here.
 from .comparebar import *
 from .bar import *
+from .map import *
 from django.views.decorators.cache import cache_page
 import json
 
@@ -82,3 +83,12 @@ def radar(request):
         'history':[5000, 14000, 28000, 31000, 31000,42000,21000],
     }
     return JsonResponse(data)
+
+def map(request):
+    # 地图scatter的极大温度
+    data = return_sql_map()
+    # data={
+    #     'month':[4300, 10000, 28000, 35000, 35000,50000,19000],
+    #     'history':[5000, 14000, 28000, 31000, 31000,42000,21000],
+    # }
+    return JsonResponse(data,safe=False)#返回的是一个列表所有要safe=false

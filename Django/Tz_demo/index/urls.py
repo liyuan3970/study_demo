@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'history',views.history),
     url(r'bar',views.bar),
     url(r'radar',views.radar),
+    url(r'map',views.map),
 
 ]
