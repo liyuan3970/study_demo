@@ -7,7 +7,7 @@ $(function(){
 	map.setOption({
             title:{
 				text:'              台州市气象信息系统',
-				textStyle:{fontSize:40},
+				textStyle:{fontSize:50},
 		    },
 		    tooltip: {
 		        trigger: 'item',
@@ -18,11 +18,16 @@ $(function(){
 
 
                     },
+            label: {
+                        show: true,
+                        color: "rgba(50, 44, 44, 1)",
+                        //formatter: '{c}[2]'
+                    },
 		    series: [{
                         name: '确诊数量',
                         type: 'scatter',
 
-                        symbolSize:50,
+                        symbolSize:5,
                         coordinateSystem: 'geo',
 
                         data:data
