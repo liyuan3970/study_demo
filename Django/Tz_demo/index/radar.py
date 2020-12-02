@@ -16,7 +16,7 @@ print(last_day_of_last_month)
 end_day_in_mouth = today.replace(day=1)
 
 #stations =['58559','58652','58568','58660','K8201','K8301','58665','58664','58665']
-def return_sql_bar():
+def return_sql_radar():
     print("this is a read station file")
     server = "172.21.158.201"    # 连接服务器地址
     user = "down"# 连接帐号
@@ -36,15 +36,24 @@ def return_sql_bar():
            "And (Year(tTime) Between '1981' And '2010') And ((Month(tTime)*100+Day(tTime)) Between 1101 And 1130) Group By IIiii"
     cursor.execute(sql2)
     row2 = cursor.fetchall()
-    data2 = pd.DataFrame(list(row2))
-    sql3 = "SELECT IIiii, count(R20_20)/29.0 as Rn  FROM Tab_HistoryData Where R20_20>0  And IIiii In ('58665') " \
+    clomns2 = ['IIiii','Ta','Tn','Tx','S','Fy']
+    data2 = pd.DataFrame(list(row2),columns=clomns2)
+    sql3 = "SELECT IIiii, count(R20_20)/30.0 as Rn ,sum(R20_20)/30  FROM Tab_HistoryData Where R20_20>0  And IIiii In ('58665') " \
            "And (Year(tTime) Between '1981' And '2010') And ((Month(tTime)*100+Day(tTime)) Between 1101 And 1130) Group By IIiii"
     cursor.execute(sql3)
     row3 = cursor.fetchall()
     data3 = pd.DataFrame(list(row3))
-    print(data3)
-
-return_sql_bar()
-
-
-
+    print("666")
+    month = [data['Ta'].mean(),data['Tn'].mean(),data['Tx'].mean(),
+             float(data[data["R20_20"]>0.0].sum()['R20_20']),float(data[data["R20_20"]>=0.1].count()['R20_20']),
+             data['S'].mean(),float(data['Fy'].max())]
+    history = [data2['Ta'].values[0]/10.0,data2['Tn'].values[0]/10.0,data2['Tx'].values[0]/10.0,
+               float(data3.iloc[0,1]),data3.iloc[0,2]/10.0,
+               data2['S'].values[0]/1.0,data2['Fy'].values[0]/10.0]
+    result_radar = {
+        'month':month,
+        'history':history,
+    }
+    print(result_radar)
+    return result_radar
+return_sql_radar()

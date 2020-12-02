@@ -4,6 +4,7 @@ from django.http import HttpResponse,JsonResponse
 from .comparebar import *
 from .bar import *
 from .map import *
+from .radar import *
 from django.views.decorators.cache import cache_page
 import json
 
@@ -78,17 +79,20 @@ def bar(request):
 
 def radar(request):
     # 计算与常年的对比
-    data={
-        'month':[4300, 10000, 28000, 35000, 35000,50000,19000],
-        'history':[5000, 14000, 28000, 31000, 31000,42000,21000],
-    }
+    data =return_sql_radar()
+
+
+    # data={
+    #     'month':[4300, 10000, 28000, 35000, 35000,50000,19000],
+    #     'history':[5000, 14000, 28000, 31000, 31000,42000,21000],
+    # }
     return JsonResponse(data)
 
 def map(request):
     # 地图scatter的极大温度
     data = return_sql_map()
     # data={
-    #     'month':[4300, 10000, 28000, 35000, 35000,50000,19000],
+    #     'month':[4300, 10000, 28000, 35000, 35000,50000,19000],#Ta,Tn,Tx,RR,Rn,S,Fy
     #     'history':[5000, 14000, 28000, 31000, 31000,42000,21000],
     # }
     return JsonResponse(data,safe=False)#返回的是一个列表所有要safe=false
