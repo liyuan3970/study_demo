@@ -24,11 +24,25 @@ def return_sql_bar():
     conn = pymssql.connect(server, user, password, "ZJSZDZDB")  #获取连接
     cursor = conn.cursor() # 获取光标
     cursor.execute('USE ZJSZDZDB' )
+    # 计算历史降水排位
     sql = "SELECT Year(tTime) as ye, Sum(R20_20) as Rsum  FROM Tab_HistoryData Where R20_20>-1 And IIiii In ('58665') " \
-          "And ((Month(tTime)*100+Day(tTime)) Between 1101 And 1130)  GROUP BY YEAR(tTime) ORDER BY  Rsum "
+          "And ((Month(tTime)*100+Day(tTime)) Between 1101 And 1130)  GROUP BY YEAR(tTime) ORDER BY  Rsum desc"
     cursor.execute(sql)
     row = cursor.fetchall()
     data = pd.DataFrame(list(row))
-    print(data)
+    # 计算历史最低气温
+    sql2 = "SELECT Year(tTime) as ye, min(Tn) as Rsum  FROM Tab_HistoryData Where R20_20>-1 And IIiii In ('58665') " \
+          "And ((Month(tTime)*100+Day(tTime)) Between 1101 And 1130)  GROUP BY YEAR(tTime) ORDER BY  Rsum desc"
+    cursor.execute(sql2)
+    row2 = cursor.fetchall()
+    data2 = pd.DataFrame(list(row2))
+    # 计算历史最高气温
+    sql3 = "SELECT Year(tTime) as ye, max(Tx) as Rsum  FROM Tab_HistoryData Where R20_20>-1 And IIiii In ('58665') " \
+          "And ((Month(tTime)*100+Day(tTime)) Between 1101 And 1130)  GROUP BY YEAR(tTime) ORDER BY  Rsum desc"
+    cursor.execute(sql3)
+    row3 = cursor.fetchall()
+    data3 = pd.DataFrame(list(row3))
+    tem_min = data3.iloc[0:6,:]
+    print(tem_min)
 
 return_sql_bar()
