@@ -11,10 +11,11 @@ $(function(){
         trigger: 'axis',
         axisPointer: {
             type: 'shadow'
-        }
+        },
+        formatter:'{c1}:  {b}'
     },
     legend: {
-        data: ['降水', '气温']
+        data: ['降水', '最高气温','最低气温']
     },
     grid: {
         left: '3%',
@@ -45,7 +46,12 @@ $(function(){
             data: data.pre
         },
         {
-            name: '气温',
+            name: '最高气温',
+            type: 'bar',
+            data: data.tem
+        },
+        {
+            name: '最低气温',
             type: 'bar',
             data: data.tem
         }
