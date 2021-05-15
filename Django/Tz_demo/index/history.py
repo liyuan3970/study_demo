@@ -43,6 +43,6 @@ def return_sql_bar():
     row3 = cursor.fetchall()
     data3 = pd.DataFrame(list(row3))
     tem_min = data3.iloc[0:6,:]
-    print(tem_min)
+    print(data)
 
 return_sql_bar()

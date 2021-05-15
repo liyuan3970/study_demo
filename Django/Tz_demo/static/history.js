@@ -12,7 +12,7 @@ $(function(){
         axisPointer: {
             type: 'shadow'
         },
-        formatter:'{c1}:  {b}'
+        formatter:'{c0}'
     },
     legend: {
         data: ['降水', '最高气温','最低气温']
