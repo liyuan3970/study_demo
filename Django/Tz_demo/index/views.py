@@ -90,9 +90,9 @@ def radar(request):
 
 def map(request):
     # 地图scatter的极大温度
-    data = return_sql_map()
-    # data={
-    #     'month':[4300, 10000, 28000, 35000, 35000,50000,19000],#Ta,Tn,Tx,RR,Rn,S,Fy
-    #     'history':[5000, 14000, 28000, 31000, 31000,42000,21000],
-    # }
+    # data = return_sql_map()
+    data={
+        'month':[4300, 10000, 28000, 35000, 35000,50000,19000],#Ta,Tn,Tx,RR,Rn,S,Fy
+        'history':[5000, 14000, 28000, 31000, 31000,42000,21000],
+    }
     return JsonResponse(data,safe=False)#返回的是一个列表所有要safe=false
